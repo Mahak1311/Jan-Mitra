@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know Your Rights — JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:22px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    /* Hero */
+    .hero{background:var(--nv);padding:72px 6% 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(18,122,16,.2),transparent 60%)}
+    .hero-inner{position:relative;z-index:1;max-width:700px}
+    .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#5EC05C;margin-bottom:16px;display:block}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(34px,4vw,56px);color:white;line-height:1.08;margin-bottom:16px}
+    .hero h1 em{color:#5EC05C;font-style:normal}
+    .hero-sub{font-size:16px;color:rgba(255,255,255,.55);line-height:1.7;max-width:540px;margin-bottom:36px;font-weight:300}
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .btn-green{background:var(--gr);color:white;padding:13px 26px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-green:hover{background:#0f6a0e;transform:translateY(-2px)}
+    .btn-ghost{background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.3);padding:12px 24px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-ghost:hover{border-color:white;color:white}
+    /* Stats */
+    .stats-strip{display:grid;grid-template-columns:repeat(5,1fr);background:var(--gr)}
+    .ss{padding:20px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.15)}
+    .ss:last-child{border-right:none}
+    .ssn{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;color:white;display:block}
+    .ssl{font-size:9.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:3px;display:block}
+    /* Section layout */
+    .section{padding:64px 6%}
+    .sec-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sf);display:block;text-align:center;margin-bottom:10px}
+    .sec-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,2.5vw,40px);color:var(--nv);text-align:center;margin-bottom:10px}
+    .sec-h em{color:var(--sf);font-style:normal}
+    .sec-sub{font-size:14px;color:var(--inl);text-align:center;line-height:1.65;max-width:560px;margin:0 auto 44px}
+    /* Rights accordion grid */
+    .rights-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+    .rc{background:white;border-radius:14px;border:1.5px solid var(--bd);overflow:hidden;transition:box-shadow .25s,transform .25s}
+    .rc:hover{box-shadow:0 10px 36px rgba(12,35,64,.09);transform:translateY(-2px)}
+    .rc.open{box-shadow:0 14px 44px rgba(12,35,64,.11);transform:none}
+    .rc-top{height:4px}
+    .rc-head{display:flex;align-items:flex-start;gap:14px;padding:22px 22px 16px;cursor:pointer;user-select:none}
+    .rc-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+    .rc-meta{flex:1}
+    .rc-title{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:var(--nv);margin-bottom:4px;line-height:1.3}
+    .rc-sum{font-size:12px;color:var(--inl);line-height:1.5}
+    .rc-arr{font-size:16px;color:var(--inl);flex-shrink:0;align-self:center;transition:transform .3s}
+    .rc.open .rc-arr{transform:rotate(180deg)}
+    .rc-body{max-height:0;overflow:hidden;transition:max-height .42s cubic-bezier(.4,0,.2,1)}
+    .rc.open .rc-body{max-height:700px}
+    .rc-list{padding:4px 22px 4px}
+    .ri{padding:12px 0;border-bottom:1px solid var(--bd)}
+    .ri:last-of-type{border-bottom:none}
+    .ri-h{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:3px;display:flex;align-items:flex-start;gap:7px;line-height:1.4}
+    .ri-h::before{content:'✓';font-size:11px;color:var(--gr);flex-shrink:0;margin-top:2px}
+    .ri-d{font-size:12px;color:var(--inm);line-height:1.6;padding-left:18px}
+    .rc-hl{display:flex;align-items:center;gap:10px;background:var(--cr);padding:12px 22px;border-top:1px solid var(--bd)}
+    .rc-hl-lbl{font-size:11.5px;font-weight:600;color:var(--inm);flex:1}
+    .rc-hl-num{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--nv);text-decoration:none}
+    .rc-hl-num:hover{color:var(--sf)}
+    /* Helplines */
+    .hl-section{padding:64px 6%;background:var(--nv)}
+    .hl-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(24px,2.5vw,38px);color:white;text-align:center;margin-bottom:8px}
+    .hl-h em{color:var(--sfb);font-style:normal}
+    .hl-sub{font-size:13.5px;color:rgba(255,255,255,.45);text-align:center;margin-bottom:32px}
+    .hl-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+    .hf{padding:7px 16px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.6);font-family:'DM Sans',sans-serif;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .2s}
+    .hf.active,.hf:hover{background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.3)}
+    .hl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+    .hl-card{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.09);border-radius:12px;padding:18px 20px;transition:all .25s;display:none}
+    .hl-card.show{display:block}
+    .hl-card:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+    .hl-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:9px;letter-spacing:.5px;text-transform:uppercase}
+    .b-emergency{background:rgba(211,47,47,.25);color:#FF8A80}
+    .b-women{background:rgba(181,55,138,.25);color:#F48FB1}
+    .b-legal{background:rgba(12,110,189,.25);color:#90CAF9}
+    .b-health{background:rgba(18,122,16,.25);color:#A5D6A7}
+    .b-farmer{background:rgba(192,138,32,.25);color:#FFE082}
+    .b-children{background:rgba(123,45,139,.25);color:#CE93D8}
+    .b-seniors{background:rgba(45,71,84,.5);color:#B0BEC5}
+    .b-consumer{background:rgba(12,110,189,.2);color:#81D4FA}
+    .b-cyber{background:rgba(211,47,47,.2);color:#FFAB91}
+    .hl-num{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;color:white;display:block;margin-bottom:4px;letter-spacing:.3px}
+    .hl-name{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:3px}
+    .hl-desc{font-size:11.5px;color:rgba(255,255,255,.42);line-height:1.5}
+    .hl-avail{font-size:10px;font-weight:600;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.3px}
+    /* RTI Section */
+    .rti-wrap{padding:64px 6%;max-width:1100px;margin:0 auto}
+    .rti-box{background:white;border-radius:18px;overflow:hidden;border:1.5px solid var(--bd);box-shadow:0 6px 28px rgba(12,35,64,.06)}
+    .rti-hd{background:var(--nv);padding:28px 36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+    .rti-hd-icon{font-size:40px}
+    .rti-hd-text h3{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;color:white;margin-bottom:4px}
+    .rti-hd-text p{font-size:13px;color:rgba(255,255,255,.45)}
+    .rti-body{padding:32px 36px}
+    .rti-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(18,122,16,.1);color:var(--gr);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:24px;border:1px solid rgba(18,122,16,.2)}
+    .rti-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:28px}
+    .rti-s{text-align:center;padding:22px 16px;background:var(--cr);border-radius:12px;border:1.5px solid var(--bd)}
+    .rti-sn{font-family:'Playfair Display',serif;font-weight:900;font-size:30px;color:var(--sf);display:block;margin-bottom:8px}
+    .rti-st{font-size:13px;font-weight:700;color:var(--nv);margin-bottom:5px}
+    .rti-sd{font-size:11.5px;color:var(--inm);line-height:1.55}
+    .rti-action{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn-rti{display:inline-flex;align-items:center;gap:8px;background:var(--nv);color:white;padding:12px 24px;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .22s}
+    .btn-rti:hover{background:var(--sf);transform:translateY(-1px)}
+    .rti-note{font-size:12.5px;color:var(--inl);line-height:1.6}
+    .rti-note strong{color:var(--nv)}
+    /* CTA */
+    .cta{background:linear-gradient(135deg,var(--gr),#0d6b0c);padding:64px 6%;text-align:center;position:relative;overflow:hidden}
+    .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(255,255,255,.06),transparent 65%)}
+    .cta h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(24px,3vw,40px);color:white;margin-bottom:10px;position:relative}
+    .cta p{color:rgba(255,255,255,.6);font-size:14.5px;margin-bottom:28px;position:relative}
+    .cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative}
+    .btn-w{background:white;color:var(--nv);padding:13px 30px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-w:hover{background:var(--sfb);color:white}
+    .btn-ow{background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.3);padding:12px 26px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-ow:hover{border-color:white;color:white}
+    /* Footer */
+    footer{background:#070F19;padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .fl{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:white}.fl em{color:var(--sf);font-style:normal}
+    .flinks{display:flex;gap:22px;list-style:none}
+    .flinks a{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+    .flinks a:hover{color:var(--sf)}
+    .fcp{font-size:10px;color:rgba(255,255,255,.17)}
+    @media(max-width:768px){.nav-links{display:none}.stats-strip{grid-template-columns:repeat(3,1fr)}.hl-grid{grid-template-columns:repeat(2,1fr)}.rti-steps{grid-template-columns:repeat(2,1fr)}.rti-body{padding:20px}.rti-hd{padding:20px}}
+    @media(max-width:480px){.rights-grid{grid-template-columns:1fr}.hl-grid{grid-template-columns:1fr}.stats-strip{grid-template-columns:repeat(2,1fr)}.rti-steps{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="tricolor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+      <span class="logo-wm">Jan<em>Mitra</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="rights.html" class="active">Rights</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+    <a href="chat.html" class="nav-cta">Ask JanMitra</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Your Constitutional Rights</span>
+      <h1>Know Your <em>Rights.</em><br>Claim What's Yours.</h1>
+      <p class="hero-sub">Every Indian citizen has legal rights that protect them at work, as a consumer, as a woman, as a farmer, and as a child. JanMitra makes them easy to understand.</p>
+      <div class="hero-btns">
+        <a href="#rights" class="btn-green">Explore Your Rights</a>
+        <a href="#helplines" class="btn-ghost">Emergency Helplines</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <div class="stats-strip">
+    <div class="ss"><span class="ssn">6</span><span class="ssl">Rights Categories</span></div>
+    <div class="ss"><span class="ssn">20+</span><span class="ssl">Helplines Listed</span></div>
+    <div class="ss"><span class="ssn">₹10</span><span class="ssl">RTI Filing Fee</span></div>
+    <div class="ss"><span class="ssn">30</span><span class="ssl">Days RTI Response</span></div>
+    <div class="ss"><span class="ssn">Free</span><span class="ssl">Legal Aid (NALSA)</span></div>
+  </div>
+
+  <!-- Rights Categories -->
+  <section class="section" id="rights">
+    <span class="sec-label">Know Your Rights</span>
+    <h2 class="sec-h">Rights the law <em>guarantees</em> you</h2>
+    <p class="sec-sub">Click any category to expand your rights. These are legally enforceable — not favours.</p>
+    <div class="rights-grid" id="rightsGrid"></div>
+  </section>
+
+  <!-- Helplines -->
+  <section class="hl-section" id="helplines">
+    <h2 class="hl-h">Emergency &amp; <em>Support Helplines</em></h2>
+    <p class="hl-sub">All numbers are toll-free unless noted. Save them before you need them.</p>
+    <div class="hl-filters">
+      <button class="hf active" onclick="filterHl(this,'all')">All</button>
+      <button class="hf" onclick="filterHl(this,'emergency')">🚨 Emergency</button>
+      <button class="hf" onclick="filterHl(this,'women')">👩 Women</button>
+      <button class="hf" onclick="filterHl(this,'legal')">⚖️ Legal</button>
+      <button class="hf" onclick="filterHl(this,'health')">🏥 Health</button>
+      <button class="hf" onclick="filterHl(this,'farmer')">🌾 Farmer</button>
+      <button class="hf" onclick="filterHl(this,'consumer')">🛒 Consumer</button>
+      <button class="hf" onclick="filterHl(this,'children')">👶 Children</button>
+    </div>
+    <div class="hl-grid" id="hlGrid"></div>
+  </section>
+
+  <!-- RTI Section -->
+  <div class="rti-wrap" id="rti">
+    <div class="rti-box">
+      <div class="rti-hd">
+        <div class="rti-hd-icon">📋</div>
+        <div class="rti-hd-text">
+          <h3>Right to Information (RTI Act, 2005)</h3>
+          <p>Ask any government office for any document, record, or decision — they must respond within 30 days</p>
+        </div>
+      </div>
+      <div class="rti-body">
+        <div class="rti-pill">✅ Free for BPL cardholders &nbsp;·&nbsp; ₹10 fee for others &nbsp;·&nbsp; Response within 30 days</div>
+        <div class="rti-steps">
+          <div class="rti-s"><span class="rti-sn">01</span><div class="rti-st">Identify the Department</div><div class="rti-sd">Find which ministry or government body holds the information you need.</div></div>
+          <div class="rti-s"><span class="rti-sn">02</span><div class="rti-st">Write Your Question</div><div class="rti-sd">State your question clearly and specifically. You do not need to give a reason.</div></div>
+          <div class="rti-s"><span class="rti-sn">03</span><div class="rti-st">File Online / Offline</div><div class="rti-sd">Visit <strong>rtionline.gov.in</strong> for central depts, or submit in person to the Public Information Officer.</div></div>
+          <div class="rti-s"><span class="rti-sn">04</span><div class="rti-st">Pay ₹10 Fee</div><div class="rti-sd">Pay by IPO, DD, or online. BPL cardholders are completely exempt — attach a copy of your ration card.</div></div>
+          <div class="rti-s"><span class="rti-sn">05</span><div class="rti-st">Wait 30 Days</div><div class="rti-sd">The PIO must respond within 30 days (48 hours for life or liberty). Keep your acknowledgement slip.</div></div>
+          <div class="rti-s"><span class="rti-sn">06</span><div class="rti-st">Appeal if Needed</div><div class="rti-sd">Unsatisfied? First appeal to the same department (free). Then to the Information Commission (no fee).</div></div>
+        </div>
+        <div class="rti-action">
+          <a href="https://rtionline.gov.in" target="_blank" rel="noopener" class="btn-rti">🔗 File RTI at rtionline.gov.in</a>
+          <p class="rti-note"><strong>Tip:</strong> Ask JanMitra AI to help you draft your RTI question — <a href="chat.html?q=help+me+write+RTI" style="color:var(--sf);font-weight:700">tap here</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Have a rights question?<br>Ask JanMitra AI.</h2>
+    <p>Get plain-language answers about labour rights, consumer protection, RTI and more — in Hindi or English.</p>
+    <div class="cta-btns">
+      <a href="chat.html?q=what+are+my+rights" class="btn-w">Ask JanMitra AI →</a>
+      <a href="jobs.html" class="btn-ow">Government Jobs &amp; Exams</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fl">Jan<em>Mitra</em></div>
+    <ul class="flinks">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="fcp">Built for Bharat</div>
+  </footer>
+
+  <script src="js/auth-ui.js"></script>
+  <script>
+    // ── Rights Data ─────────────────────────────────────────────
+    const RIGHTS = [
+      {
+        color: '#D4611A', bg: 'rgba(212,97,26,.1)', icon: '🏗️',
+        title: 'Labour & Employment Rights',
+        summary: 'Minimum wages, MGNREGA 100 days, EPF, maternity leave, safe workplace',
+        rights: [
+          { h: 'Right to Minimum Wages', d: 'Every employer must pay at least the state-mandated minimum wage — typically ₹400–700/day. File a complaint at your state Labour Department if denied.' },
+          { h: 'MGNREGA — 100 Days Guaranteed Employment', d: 'Any rural adult can demand 100 days of work per year from the Gram Panchayat. Work must start within 15 days or an unemployment allowance is owed.' },
+          { h: 'Provident Fund (EPF)', d: 'If your employer has 20+ employees and pays ≥₹15,000/month, they must enroll you in EPF and contribute 12% of your basic salary. Check balance at passbook.epfindia.gov.in.' },
+          { h: '26 Weeks Paid Maternity Leave', d: 'Women employees in organisations with 10+ workers are entitled to 26 weeks of paid maternity leave for the first two children. Cannot be dismissed during this period.' },
+          { h: 'Safe Working Conditions', d: 'Every employer must provide safe equipment, proper lighting, ventilation, and sanitation. File complaint at the Factory Inspector or Labour Commissioner office.' },
+        ],
+        helpline: { label: 'Labour Ministry Helpline', number: '1800-11-7979' }
+      },
+      {
+        color: '#0C6EBD', bg: 'rgba(12,110,189,.1)', icon: '🛒',
+        title: 'Consumer Rights',
+        summary: 'Safe products, refunds, consumer courts, RERA, online fraud',
+        rights: [
+          { h: 'Right to Safe Products & Information', d: 'You have the right to information about a product\'s quality, quantity, price, and safety before purchasing. Misleading ads are punishable.' },
+          { h: 'File Consumer Complaint Online', d: 'File at consumerhelpline.gov.in. District Consumer Court handles claims up to ₹50 lakh, State Commission up to ₹2 crore, National Commission for above.' },
+          { h: 'E-Commerce Returns & Refunds', d: 'Online sellers must clearly state return policies. You can file against fake reviews, non-delivery, and counterfeit goods — National Consumer Helpline: 1800-11-4000.' },
+          { h: 'RERA for Property Buyers', d: 'If a builder delays possession or misrepresents the project, file at your state RERA authority (rera.gov.in). Builder must pay you interest for delays.' },
+          { h: 'Utility & Telecom Complaints', d: 'Electricity disputes: approach the Electricity Ombudsman in your state. Telecom disputes: TRAI Appellate Authority. TRAI helpline: 1800-110-420.' },
+        ],
+        helpline: { label: 'National Consumer Helpline', number: '1800-11-4000' }
+      },
+      {
+        color: '#B5378A', bg: 'rgba(181,55,138,.1)', icon: '👩',
+        title: "Women's Rights",
+        summary: 'Domestic violence, POSH, equal pay, zero FIR, maternity benefits',
+        rights: [
+          { h: 'Protection from Domestic Violence (2005)', d: 'Covers physical, emotional, sexual, and economic abuse. Call helpline 181 to reach a Protection Officer — free, 24/7. You can get a Protection Order without filing an FIR.' },
+          { h: 'POSH Act — Workplace Harassment', d: 'Every organisation with 10+ employees must have an Internal Complaints Committee (ICC). Complaints must be resolved within 60 days. The employer can be penalised.' },
+          { h: 'Zero FIR — File Anywhere', d: 'A woman can file an FIR at any police station in India (zero FIR), regardless of jurisdiction. The station must register it and transfer it later.' },
+          { h: 'Equal Pay for Equal Work', d: 'The Equal Remuneration Act mandates equal pay regardless of gender for the same work. File complaint with the Labour Commissioner.' },
+          { h: 'Maternity & Childcare Benefits', d: '26 weeks paid leave for the first two children. Crèche facility mandatory for employers with 50+ employees. Cannot be dismissed or demoted for maternity.' },
+        ],
+        helpline: { label: 'Women Helpline', number: '181' }
+      },
+      {
+        color: '#127A10', bg: 'rgba(18,122,16,.1)', icon: '📋',
+        title: 'Right to Information (RTI)',
+        summary: 'Demand answers from any govt office in 30 days — ₹10 fee, free for BPL',
+        rights: [
+          { h: 'What You Can Ask For', d: 'Any document, record, memo, email, opinion, order, contract, logbook, or data held by a public authority. Officers cannot refuse without a valid legal reason.' },
+          { h: 'How to File RTI Online', d: 'Visit rtionline.gov.in. Select the department, describe your request clearly, and pay ₹10 by online transfer, DD, or IPO. BPL cardholders are fully exempt.' },
+          { h: '48-Hour Response — Life or Liberty', d: 'RTI requests related to the life or liberty of a person must be responded to within 48 hours.' },
+          { h: 'First Appeal — Free', d: 'Unsatisfied with the response? File a first appeal with the same department\'s Appellate Authority within 30 days — no fee.' },
+          { h: 'Second Appeal / Complaint', d: 'Escalate to the State or Central Information Commission. No fee. They can impose ₹250/day penalty on PIO for delays, up to ₹25,000.' },
+        ],
+        helpline: { label: 'RTI Portal', number: 'rtionline.gov.in' }
+      },
+      {
+        color: '#7B2D8B', bg: 'rgba(123,45,139,.1)', icon: '🎓',
+        title: 'Right to Education & Child Rights',
+        summary: 'Free schooling 6–14 years, no child labour, 25% EWS seats in private schools',
+        rights: [
+          { h: 'Free & Compulsory Education (RTE Act 2009)', d: 'Every child aged 6–14 years has the right to free elementary education. No government school can charge fees or deny admission.' },
+          { h: '25% Seats Reserved in Private Schools', d: 'All unaided private schools must reserve 25% seats for EWS and disadvantaged children with reimbursement from the government. Apply via your state\'s education department.' },
+          { h: 'Child Labour Prohibited Under 14', d: 'No child under 14 can be employed in any occupation. Under 18 in hazardous work. Report violations to Childline: 1098.' },
+          { h: 'Midday Meal Scheme', d: 'Every student in a government or government-aided school (Class 1–8) is entitled to a free hot cooked meal every school day.' },
+          { h: 'No Detention Policy (Classes 1–5)', d: 'Children cannot be expelled or detained in Classes 1 to 5 under the RTE Act. Check your state\'s current policy for Class 6–8 as rules vary.' },
+        ],
+        helpline: { label: 'Childline (Child Rights)', number: '1098' }
+      },
+      {
+        color: '#2E7D32', bg: 'rgba(46,125,50,.1)', icon: '🌾',
+        title: 'Farmer & Agricultural Rights',
+        summary: 'Land records, MSP, crop insurance, loan restructuring, canal water',
+        rights: [
+          { h: 'Right to Land Records Online', d: 'Your Khasra, Khatauni, and Jamabandi records are available free at your state\'s Bhulekh portal. No need to visit a tehsil office for basic records.' },
+          { h: 'Minimum Support Price (MSP)', d: 'The government declares MSP for 23 crops. If the market price is below MSP, sell through APMC mandis or government procurement agencies to claim MSP.' },
+          { h: 'Crop Loan Restructuring', d: 'If your crop fails due to natural calamity, you can get your crop loan restructured or rescheduled. Notify the bank within 48 hours of the disaster.' },
+          { h: 'PM Fasal Bima — Crop Insurance', d: 'Insure your crop at 2% (Kharif) or 1.5% (Rabi) premium. File crop loss claim within 72 hours to your bank or insurance company.' },
+          { h: 'MGNREGA Job Card Entitlement', d: 'Every rural household is entitled to a job card and 100 days of unskilled work per year. Apply at the Gram Panchayat — rejection must be in writing.' },
+        ],
+        helpline: { label: 'Kisan Call Centre', number: '1800-180-1551' }
+      },
+    ];
+
+    // ── Helplines Data (from data/helplines.json) ───────────────
+    const BADGE_MAP = {
+      emergency: 'b-emergency', women: 'b-women', legal: 'b-legal',
+      health: 'b-health', farmer: 'b-farmer', consumer: 'b-consumer',
+      children: 'b-children', seniors: 'b-seniors', cyber: 'b-cyber'
+    };
+
+    let hlData = [];
+
+    async function loadHelplines() {
+      try {
+        const res = await fetch('/data/helplines.json');
+        hlData = await res.json();
+      } catch (e) { hlData = []; }
+      renderHelplines('all');
+    }
+
+    function renderHelplines(cat) {
+      const grid = document.getElementById('hlGrid');
+      const items = cat === 'all' ? hlData : hlData.filter(h => h.category === cat);
+      grid.innerHTML = items.map(h => `
+        <div class="hl-card show">
+          <span class="hl-badge ${BADGE_MAP[h.category] || 'b-legal'}">${h.category}</span>
+          <span class="hl-num">${h.number}</span>
+          <div class="hl-name">${h.name}</div>
+          <div class="hl-desc">${h.desc}</div>
+          <div class="hl-avail">${h.available}</div>
+        </div>`).join('');
+    }
+
+    function filterHl(btn, cat) {
+      document.querySelectorAll('.hf').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderHelplines(cat);
+    }
+
+    // ── Render Rights Cards ──────────────────────────────────────
+    function renderRights() {
+      const grid = document.getElementById('rightsGrid');
+      grid.innerHTML = RIGHTS.map((r, i) => `
+        <div class="rc" id="rc${i}">
+          <div class="rc-top" style="background:${r.color}"></div>
+          <div class="rc-head" onclick="toggleRight(${i})">
+            <div class="rc-icon" style="background:${r.bg}">${r.icon}</div>
+            <div class="rc-meta">
+              <div class="rc-title">${r.title}</div>
+              <div class="rc-sum">${r.summary}</div>
+            </div>
+            <div class="rc-arr">▾</div>
+          </div>
+          <div class="rc-body">
+            <div class="rc-list">
+              ${r.rights.map(ri => `
+                <div class="ri">
+                  <div class="ri-h">${ri.h}</div>
+                  <div class="ri-d">${ri.d}</div>
+                </div>`).join('')}
+            </div>
+            <div class="rc-hl">
+              <span class="rc-hl-lbl">📞 ${r.helpline.label}</span>
+              <a href="tel:${r.helpline.number}" class="rc-hl-num">${r.helpline.number}</a>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function toggleRight(i) {
+      document.getElementById('rc' + i).classList.toggle('open');
+    }
+
+    // ── Nav auth ─────────────────────────────────────────────────
+    (function() {
+      const u = localStorage.getItem('jm_user');
+      if (!u) return;
+      try {
+        const user = JSON.parse(u);
+        const a = document.getElementById('navAuth');
+        a.textContent = (user.name || 'Profile').split(' ')[0];
+        a.href = 'profile.html';
+        a.style.color = 'var(--sf)';
+      } catch(e) {}
+    })();
+
+    renderRights();
+    loadHelplines();
+  </script>
+  <script src="js/lang-switcher.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

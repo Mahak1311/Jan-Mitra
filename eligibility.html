@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Eligibility — JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--wh:#FFFFFF;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;border:none;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    .hero{background:var(--nv);padding:60px 6% 68px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,97,26,.15) 0%,transparent 60%)}
+    .hero-inner{max-width:600px;position:relative;z-index:1}
+    .hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sfb);margin-bottom:14px;display:block}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,3.5vw,50px);color:white;margin-bottom:12px;line-height:1.1}
+    .hero h1 em{color:var(--sfb);font-style:normal}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,.52);line-height:1.7;font-weight:300}
+    .main-wrap{max-width:1080px;margin:0 auto;padding:52px 6% 80px;display:grid;grid-template-columns:1fr 380px;gap:36px;align-items:start}
+    .form-card{background:white;border-radius:16px;border:1.5px solid var(--bd);overflow:hidden;box-shadow:0 8px 32px rgba(12,35,64,.07)}
+    .fc-head{padding:24px 28px;border-bottom:1.5px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+    .fc-title{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .fc-step{font-size:11px;font-weight:700;color:var(--inl);letter-spacing:1.5px;text-transform:uppercase}
+    .steps-bar{display:flex;padding:0 28px;gap:0;border-bottom:1.5px solid var(--bd)}
+    .step-dot{flex:1;padding:12px 0;position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+    .step-dot::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .2s}
+    .step-dot.active::after{background:var(--sf)}
+    .step-dot.done .sd-num{background:var(--gr);color:white;border-color:var(--gr)}
+    .step-dot.active .sd-num{background:var(--sf);color:white;border-color:var(--sf)}
+    .sd-num{width:24px;height:24px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--inl);transition:all .2s}
+    .sd-lbl{font-size:9.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--inl)}
+    .step-dot.active .sd-lbl{color:var(--sf)}
+    .fc-body{padding:28px}
+    .step-panel{display:none}
+    .step-panel.active{display:block;animation:fadeInUp .35s ease}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .field-group{margin-bottom:20px}
+    .field-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--inm);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+    .field-label span{font-size:14px}
+    .fld{width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--cr);transition:border-color .2s,box-shadow .2s;outline:none}
+    .fld:focus{border-color:var(--sf);box-shadow:0 0 0 3px rgba(212,97,26,.1);background:white}
+    .fld-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .radio-group{display:flex;gap:10px;flex-wrap:wrap}
+    .radio-btn{padding:9px 16px;border-radius:6px;border:1.5px solid var(--bd);background:white;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--inm);cursor:pointer;transition:all .2s;user-select:none}
+    .radio-btn input{display:none}
+    .radio-btn.checked{background:var(--nv);color:white;border-color:var(--nv)}
+    .range-wrap{position:relative;padding-top:6px}
+    .range-track{width:100%;height:5px;border-radius:3px;background:var(--bd);accent-color:var(--sf)}
+    input[type=range]{width:100%;cursor:pointer}
+    .range-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--inl);margin-top:5px}
+    .income-val{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--sf);margin-bottom:8px;display:block}
+    .checkbox-group{display:flex;flex-direction:column;gap:8px}
+    .chk-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;border:1.5px solid var(--bd);background:white;cursor:pointer;transition:all .2s}
+    .chk-item:hover{border-color:var(--sf);background:rgba(212,97,26,.03)}
+    .chk-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--sf);cursor:pointer}
+    .chk-lbl{font-size:13px;font-weight:500;color:var(--ink)}
+    .nav-btns{display:flex;gap:10px;margin-top:8px}
+    .btn-next{flex:1;background:var(--sf);color:white;border:none;padding:13px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .22s}
+    .btn-next:hover{background:var(--nv);transform:translateY(-1px)}
+    .btn-back{padding:13px 20px;background:white;color:var(--inm);border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .22s}
+    .btn-back:hover{border-color:var(--nv);color:var(--nv)}
+    .sidebar{display:flex;flex-direction:column;gap:16px}
+    .tip-card{background:white;border-radius:14px;border:1.5px solid var(--bd);padding:22px}
+    .tc-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+    .tc-icon{font-size:22px}
+    .tc-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--nv)}
+    .tip-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .tip-list li{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--inm);line-height:1.55}
+    .tip-list li::before{content:'?';color:var(--gr);font-weight:700;flex-shrink:0;margin-top:1px}
+    .cat-card{background:white;border-radius:14px;border:1.5px solid var(--bd);padding:22px}
+    .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .cat-item{padding:10px;border-radius:8px;border:1.5px solid var(--bd);text-align:center;font-size:11.5px;font-weight:600;color:var(--inm);cursor:pointer;transition:all .2s}
+    .cat-item:hover{border-color:var(--sf);color:var(--sf);background:rgba(212,97,26,.04)}
+    .result-overlay{display:none;position:fixed;inset:0;background:rgba(7,15,25,.65);z-index:300;align-items:center;justify-content:center;padding:20px}
+    .result-overlay.show{display:flex}
+    .result-modal{background:white;border-radius:20px;max-width:560px;width:100%;overflow:hidden;animation:fadeInUp .4s ease}
+    .rm-head{background:var(--nv);padding:28px 32px;position:relative;overflow:hidden}
+    .rm-head::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80%,rgba(212,97,26,.2),transparent 60%)}
+    .rm-head h2{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;color:white;position:relative}
+    .rm-head h2 em{color:var(--sfb);font-style:normal}
+    .rm-head p{font-size:13px;color:rgba(255,255,255,.5);margin-top:6px;position:relative}
+    .rm-body{padding:28px 32px}
+    .results-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .res-item{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:10px;background:var(--cr);border:1.5px solid var(--bd)}
+    .ri-icon{font-size:22px;flex-shrink:0}
+    .ri-name{font-weight:600;font-size:14px;color:var(--nv)}
+    .ri-why{font-size:12px;color:var(--inm);margin-top:2px;line-height:1.45}
+    .ri-badge{margin-left:auto;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;flex-shrink:0}
+    .rb-match{background:#e6f4e6;color:var(--gr)}
+    .rb-check{background:rgba(212,97,26,.1);color:var(--sf)}
+    .rm-actions{display:flex;gap:10px}
+    .btn-go{flex:1;background:var(--sf);color:white;border:none;padding:13px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;transition:all .22s;display:block}
+    .btn-go:hover{background:var(--nv)}
+    .btn-close{padding:13px 20px;background:white;color:var(--inm);border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s}
+    .btn-close:hover{border-color:var(--nv);color:var(--nv)}
+    footer{background:#070F19;padding:26px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .fl{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:white}
+    .fl em{color:var(--sf);font-style:normal}
+    .flinks{display:flex;gap:22px;list-style:none}
+    .flinks a{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+    .flinks a:hover{color:var(--sf)}
+    .fcp{font-size:10px;color:rgba(255,255,255,.17)}
+    @media(max-width:900px){.main-wrap{grid-template-columns:1fr}.sidebar{display:none}}
+    @media(max-width:768px){.nav-links{display:none}.fld-row{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <script src="js/api.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <div class="tricolor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+      <span class="logo-wm">Jan<em>Mitra</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="eligibility.html" class="active">Eligibility</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="rights.html">Rights</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+    <a href="chat.html" class="nav-cta">Ask JanMitra</a>
+  </nav>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Instant Check — No Login Needed</span>
+      <h1>Find Schemes <em>You</em><br>Qualify For</h1>
+      <p class="hero-sub">Fill in your details in under 2 minutes. Our system matches you to government schemes you're likely eligible for.</p>
+    </div>
+  </section>
+  <div class="main-wrap">
+    <div class="form-card">
+      <div class="fc-head">
+        <span class="fc-title">Eligibility Checker</span>
+        <span class="fc-step" id="stepLabel">Step 1 of 3</span>
+      </div>
+      <div class="steps-bar">
+        <div class="step-dot active" id="dot1"><div class="sd-num">1</div><span class="sd-lbl">Profile</span></div>
+        <div class="step-dot" id="dot2"><div class="sd-num">2</div><span class="sd-lbl">Income</span></div>
+        <div class="step-dot" id="dot3"><div class="sd-num">3</div><span class="sd-lbl">Details</span></div>
+      </div>
+      <div class="fc-body">
+        <!-- Step 1 -->
+        <div class="step-panel active" id="panel1">
+          <div class="fld-row">
+            <div class="field-group"><label class="field-label"><span>👤</span> Full Name</label><input class="fld" id="f_name" placeholder="Ramesh Kumar" type="text"></div>
+            <div class="field-group"><label class="field-label"><span>📅</span> Age</label><input class="fld" id="f_age" placeholder="35" type="number" min="1" max="100"></div>
+          </div>
+          <div class="field-group"><label class="field-label"><span>🧑</span> Gender</label>
+            <div class="radio-group" id="rg_gender">
+              <label class="radio-btn"><input type="radio" name="gender" value="male" onchange="pickRadio('rg_gender',this)"> Male</label>
+              <label class="radio-btn"><input type="radio" name="gender" value="female" onchange="pickRadio('rg_gender',this)"> Female</label>
+              <label class="radio-btn"><input type="radio" name="gender" value="other" onchange="pickRadio('rg_gender',this)"> Other</label>
+            </div>
+          </div>
+          <div class="field-group"><label class="field-label"><span>📍</span> State</label>
+            <select class="fld" id="f_state">
+              <option value="">Select your state…</option>
+              <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Delhi</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+            </select>
+          </div>
+          <div class="field-group"><label class="field-label"><span>🏠</span> Residence Type</label>
+            <div class="radio-group" id="rg_res">
+              <label class="radio-btn"><input type="radio" name="res" value="rural" onchange="pickRadio('rg_res',this)"> Rural</label>
+              <label class="radio-btn"><input type="radio" name="res" value="urban" onchange="pickRadio('rg_res',this)"> Urban</label>
+            </div>
+          </div>
+          <div class="nav-btns"><button class="btn-next" onclick="goStep(2)">Next: Income Details →</button></div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step-panel" id="panel2">
+          <div class="field-group">
+            <label class="field-label"><span>💰</span> Annual Family Income</label>
+            <span class="income-val" id="incomeVal">₹1,00,000</span>
+            <input type="range" min="0" max="1200000" step="25000" value="100000" oninput="updateIncome(this.value)" id="incomeRange">
+            <div class="range-labels"><span>₹0</span><span>₹3L</span><span>₹6L</span><span>₹9L</span><span>₹12L+</span></div>
+          </div>
+          <div class="field-group"><label class="field-label"><span>👥</span> Caste Category</label>
+            <div class="radio-group" id="rg_cat">
+              <label class="radio-btn"><input type="radio" name="cat" value="gen" onchange="pickRadio('rg_cat',this)"> General</label>
+              <label class="radio-btn"><input type="radio" name="cat" value="obc" onchange="pickRadio('rg_cat',this)"> OBC</label>
+              <label class="radio-btn"><input type="radio" name="cat" value="sc" onchange="pickRadio('rg_cat',this)"> SC</label>
+              <label class="radio-btn"><input type="radio" name="cat" value="st" onchange="pickRadio('rg_cat',this)"> ST</label>
+            </div>
+          </div>
+          <div class="field-group"><label class="field-label"><span>📊</span> Poverty Status</label>
+            <div class="radio-group" id="rg_bpl">
+              <label class="radio-btn"><input type="radio" name="bpl" value="bpl" onchange="pickRadio('rg_bpl',this)"> Below Poverty Line (BPL)</label>
+              <label class="radio-btn"><input type="radio" name="bpl" value="apl" onchange="pickRadio('rg_bpl',this)"> Above Poverty Line (APL)</label>
+              <label class="radio-btn"><input type="radio" name="bpl" value="unknown" onchange="pickRadio('rg_bpl',this)"> Not Sure</label>
+            </div>
+          </div>
+          <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(1)">← Back</button>
+            <button class="btn-next" onclick="goStep(3)">Next: Additional Details →</button>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step-panel" id="panel3">
+          <div class="field-group"><label class="field-label"><span>☑️</span> Which of these apply to you?</label>
+            <div class="checkbox-group">
+              <label class="chk-item"><input type="checkbox" id="chk_farmer"> <span class="chk-lbl">I am a farmer / own cultivable land</span></label>
+              <label class="chk-item"><input type="checkbox" id="chk_student"> <span class="chk-lbl">I am a student (post-matric)</span></label>
+              <label class="chk-item"><input type="checkbox" id="chk_nopucca"> <span class="chk-lbl">I do not own a pucca (permanent) house</span></label>
+              <label class="chk-item"><input type="checkbox" id="chk_business"> <span class="chk-lbl">I run or want to start a micro-business</span></label>
+              <label class="chk-item"><input type="checkbox" id="chk_nobank"> <span class="chk-lbl">I do not have a bank account</span></label>
+              <label class="chk-item"><input type="checkbox" id="chk_disabled"> <span class="chk-lbl">I have a disability</span></label>
+            </div>
+          </div>
+          <div class="nav-btns">
+            <button class="btn-back" onclick="goStep(2)">← Back</button>
+            <button class="btn-next" onclick="checkEligibility()">Check My Eligibility →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar">
+      <div class="tip-card">
+        <div class="tc-head"><div class="tc-icon">💡</div><div class="tc-title">Tips for Accuracy</div></div>
+        <ul class="tip-list">
+          <li>Use your combined family income, not just personal</li>
+          <li>BPL status appears on your ration card</li>
+          <li>Select all categories that might apply</li>
+          <li>Results are suggestions — verify official eligibility</li>
+        </ul>
+      </div>
+      <div class="cat-card">
+        <div class="tc-head"><div class="tc-icon">🗂️</div><div class="tc-title">Browse by Category</div></div>
+        <div class="cat-grid">
+          <div class="cat-item" onclick="window.location='schemes.html'">🏠 Housing</div>
+          <div class="cat-item" onclick="window.location='schemes.html'">🌾 Agriculture</div>
+          <div class="cat-item" onclick="window.location='schemes.html'">🏥 Healthcare</div>
+          <div class="cat-item" onclick="window.location='schemes.html'">🎓 Education</div>
+          <div class="cat-item" onclick="window.location='schemes.html'">💼 Business</div>
+          <div class="cat-item" onclick="window.location='schemes.html'">🏦 Finance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result Modal -->
+  <div class="result-overlay" id="resultOverlay" onclick="closeResult(event)">
+    <div class="result-modal">
+      <div class="rm-head">
+        <h2 id="rmTitle">Your <em>Eligible</em> Schemes</h2>
+        <p id="rmSub">Based on the details you provided</p>
+      </div>
+      <div class="rm-body">
+        <div class="results-list" id="resultsList"></div>
+        <div class="rm-actions">
+          <a href="schemes.html" class="btn-go">Browse All Schemes</a>
+          <button class="btn-close" onclick="document.getElementById('resultOverlay').classList.remove('show')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fl">Jan<em>Mitra</em></div>
+    <ul class="flinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+    </ul>
+    <div class="fcp">Built for Bharat</div>
+  </footer>
+
+  <script>
+    let currentStep=1;
+    const TOTAL_STEPS=3;
+    function goStep(n){
+      document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById('panel'+n).classList.add('active');
+      for(let i=1;i<=TOTAL_STEPS;i++){
+        const d=document.getElementById('dot'+i);
+        d.classList.remove('active','done');
+        if(i<n)d.classList.add('done');
+        if(i===n)d.classList.add('active');
+      }
+      document.getElementById('stepLabel').textContent='Step '+n+' of '+TOTAL_STEPS;
+      currentStep=n;
+    }
+    function pickRadio(groupId,input){
+      document.querySelectorAll('#'+groupId+' .radio-btn').forEach(b=>b.classList.remove('checked'));
+      input.closest('.radio-btn').classList.add('checked');
+    }
+    function updateIncome(v){
+      const n=parseInt(v);
+      let label;
+      if(n>=1200000)label='?12,00,000+';
+      else if(n>=100000)label='?'+Math.floor(n/100000)+','+(n%100000===0?'00,000':(n%100000).toString().padStart(5,'0'));
+      else label='?'+n.toLocaleString('en-IN');
+      const formatted=new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:0}).format(n>=1200000?1200000:n);
+      document.getElementById('incomeVal').textContent=(n>=1200000?'?12,00,000+':formatted);
+    }
+    function checkEligibility(){
+      requireAuth(
+        'see your eligibility results',
+        'Sign in to save your eligibility results and keep personalised scheme recommendations on your profile.',
+        function () { _runEligibilityCheck(); }
+      );
+    }
+    function _runEligibilityCheck(){
+      const income=parseInt(document.getElementById('incomeRange').value)||100000;
+      const farmer=document.getElementById('chk_farmer').checked;
+      const student=document.getElementById('chk_student').checked;
+      const noPucca=document.getElementById('chk_nopucca').checked;
+      const business=document.getElementById('chk_business').checked;
+      const noBank=document.getElementById('chk_nobank').checked;
+      const catEl=document.querySelector('#rg_cat .radio-btn.checked input');
+      const cat=catEl?catEl.value:'';
+      const results=[];
+      if(farmer&&income<200000)results.push({icon:'🌾',name:'PM-KISAN',why:'Landholding farmers with small income qualify',badge:'Match',badgeClass:'rb-match',link:'checklist.html?scheme=pm-kisan'});
+      if(noPucca&&income<300000)results.push({icon:'🏠',name:'PM Awas Yojana',why:'Families without pucca house and lower income qualify',badge:'Match',badgeClass:'rb-match',link:'checklist.html?scheme=pm-awas'});
+      if(income<500000)results.push({icon:'🏥',name:'Ayushman Bharat PM-JAY',why:'Lower-income families are covered for ₹5L health insurance',badge:'Match',badgeClass:'rb-match',link:'checklist.html?scheme=ayushman-bharat'});
+      if(student&&(cat==='sc'||cat==='st'||cat==='obc'))results.push({icon:'🎓',name:'Post Matric Scholarship',why:'SC/ST/OBC students in post-matric education qualify',badge:'Match',badgeClass:'rb-match',link:'checklist.html?scheme=post-matric-scholarship'});
+      if(business)results.push({icon:'💼',name:'PM Mudra Yojana',why:'Micro-entrepreneurs can get collateral-free loans',badge:'Check',badgeClass:'rb-check',link:'checklist.html?scheme=pm-mudra'});
+      if(noBank)results.push({icon:'🏦',name:'PM Jan Dhan Yojana',why:'Any unbanked Indian resident qualifies',badge:'Match',badgeClass:'rb-match',link:'checklist.html'});
+      if(results.length===0)results.push({icon:'🔍',name:'No direct matches found',why:'Try broadening your selections or browse all schemes below.',badge:'',badgeClass:'',link:'schemes.html'});
+      const list=document.getElementById('resultsList');
+      list.innerHTML=results.map(r=>`<div class="res-item"><div class="ri-icon">${r.icon}</div><div><div class="ri-name">${r.name}</div><div class="ri-why">${r.why}</div></div>${r.badge?`<span class="ri-badge ${r.badgeClass}">${r.badge}</span>`:''}</div>`).join('');
+      document.getElementById('rmTitle').innerHTML=`Your <em>${results.filter(r=>r.badge==='Match').length} Eligible</em> Schemes`;
+      document.getElementById('rmSub').textContent='Based on the details you provided — verify on official portals';
+      document.getElementById('resultOverlay').classList.add('show');
+    } /* end _runEligibilityCheck */
+    function closeResult(e){if(e.target===document.getElementById('resultOverlay'))document.getElementById('resultOverlay').classList.remove('show');}
+  </script>
+
+<script src="js/auth-gate.js"></script>
+<script src="js/lang-switcher.js"></script>
+<script>(function(){var u=JSON.parse(localStorage.getItem('jm_user')||'null');var el=document.getElementById('navAuth');if(!el)return;if(u){el.href='profile.html';el.title='View Profile';el.style.cssText='display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--nv);text-decoration:none;padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;transition:all .2s';el.innerHTML='<span style="width:24px;height:24px;background:var(--sf);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white">'+( (u.avatar||(u.name||'?').charAt(0)).toUpperCase())+'</span><span>'+( (u.name||'Me').split(' ')[0])+'</span>';}})();</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

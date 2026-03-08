@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;border:none;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    /* Hero */
+    .hero{background:var(--nv);padding:80px 6% 100px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 60%,rgba(212,97,26,.18),transparent 55%);pointer-events:none}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.035) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+    .hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto}
+    .hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sfb);margin-bottom:20px;display:block}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(36px,5vw,64px);color:white;line-height:1.06;margin-bottom:18px}
+    .hero h1 em{color:var(--sfb);font-style:normal}
+    .hero-sub{font-size:17px;color:rgba(255,255,255,.5);line-height:1.75;font-weight:300;max-width:520px;margin:0 auto}
+    /* Mission */
+    .mission{padding:80px 6%;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1100px;margin:0 auto}
+    .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+    .rv.vis{opacity:1;transform:translateY(0)}
+    .mission-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sf);margin-bottom:16px;display:block}
+    .mission h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,2.5vw,40px);color:var(--nv);line-height:1.15;margin-bottom:20px}
+    .mission h2 em{color:var(--sf);font-style:normal}
+    .mission-text{font-size:15px;color:var(--inm);line-height:1.8;font-weight:300}
+    .mission-text+.mission-text{margin-top:14px}
+    .quote-block{background:var(--nv);border-radius:16px;padding:36px;position:relative;overflow:hidden}
+    .quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(212,97,26,.2),transparent 60%)}
+    .quote-mark{font-family:'Playfair Display',serif;font-size:80px;color:var(--sfb);line-height:.6;margin-bottom:12px;display:block;position:relative}
+    .quote-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;line-height:1.5;position:relative}
+    .quote-attr{margin-top:16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.38);position:relative}
+    /* Stats */
+    .stats-section{background:var(--sf);padding:52px 6%}
+    .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:1100px;margin:0 auto;gap:0}
+    .stat-item{text-align:center;border-right:1px solid rgba(255,255,255,.2)}
+    .stat-item:last-child{border-right:none}
+    .stat-num{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(32px,4vw,52px);color:white;display:block;line-height:1}
+    .stat-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.58);margin-top:6px;display:block}
+    /* Features */
+    .features{padding:80px 6%;max-width:1100px;margin:0 auto}
+    .section-header{text-align:center;margin-bottom:52px}
+    .sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sf);margin-bottom:10px;display:block}
+    .sec-h{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,2.5vw,42px);color:var(--nv)}
+    .sec-h em{color:var(--sf);font-style:normal}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .feat-card{background:white;border-radius:14px;border:1.5px solid var(--bd);padding:28px;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .feat-card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(12,35,64,.1);border-color:transparent}
+    .feat-icon{font-size:36px;margin-bottom:14px;display:block}
+    .feat-name{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--nv);margin-bottom:8px}
+    .feat-desc{font-size:13.5px;color:var(--inm);line-height:1.65;font-weight:300}
+    /* Team / Values */
+    .values{background:white;padding:80px 6%}
+    .values-inner{max-width:1100px;margin:0 auto}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px}
+    .val-item{display:flex;gap:14px;padding:20px;border-radius:12px;border:1.5px solid var(--bd);align-items:flex-start;transition:border-color .2s}
+    .val-item:hover{border-color:var(--sf)}
+    .val-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+    .val-name{font-weight:700;font-size:14px;color:var(--nv);margin-bottom:4px}
+    .val-desc{font-size:12.5px;color:var(--inm);line-height:1.55;font-weight:300}
+    /* CTA */
+    .cta{background:var(--nv);padding:80px 6%;text-align:center;position:relative;overflow:hidden}
+    .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(212,97,26,.15),transparent 60%)}
+    .cta h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,3vw,48px);color:white;margin-bottom:12px;position:relative}
+    .cta h2 em{color:var(--sfb);font-style:normal}
+    .cta p{color:rgba(255,255,255,.45);font-size:16px;margin-bottom:32px;position:relative;font-weight:300}
+    .cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative}
+    .btn-primary{background:var(--sf);color:white;border:none;padding:14px 32px;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:all .22s}
+    .btn-primary:hover{background:var(--sfb);transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.25);padding:13px 28px;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;transition:all .22s}
+    .btn-outline:hover{border-color:white;color:white}
+    footer{background:#070F19;padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .fl{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:white}
+    .fl em{color:var(--sf);font-style:normal}
+    .flinks{display:flex;gap:22px;list-style:none}
+    .flinks a{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+    .flinks a:hover{color:var(--sf)}
+    .fcp{font-size:10px;color:rgba(255,255,255,.17)}
+    @media(max-width:768px){.nav-links{display:none}.mission{grid-template-columns:1fr;gap:32px}.stats-inner{grid-template-columns:repeat(2,1fr)}.features-grid{grid-template-columns:1fr}.values-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <script src="js/api.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <div class="tricolor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+      <span class="logo-wm">Jan<em>Mitra</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="rights.html">Rights</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+    <a href="chat.html" class="nav-cta">Ask JanMitra</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Built for India's Citizens</span>
+      <h1>Bridging People &amp;<br><em>Government</em> Benefits</h1>
+      <p class="hero-sub">JanMitra is a free AI-powered guide that helps every Indian discover, understand, and access government welfare schemes — in minutes, not months.</p>
+    </div>
+  </section>
+
+  <section style="padding:80px 6% 0;max-width:1100px;margin:0 auto" class="mission">
+    <div class="rv">
+      <span class="mission-eyebrow">Our Mission</span>
+      <h2>No Citizen Should <em>Miss Out</em> on Benefits They Deserve</h2>
+      <p class="mission-text">India runs hundreds of welfare schemes across housing, agriculture, health, education, and livelihood. Yet millions remain unaware or struggle with complex paperwork barriers.</p>
+      <p class="mission-text">JanMitra makes this simple — one free platform that speaks your language, checks your eligibility, and tells you exactly which documents you need.</p>
+    </div>
+    <div class="rv" style="transition-delay:.15s">
+      <div class="quote-block">
+        <span class="quote-mark">"</span>
+        <div class="quote-text">The simplest access to one's rights should not require a middleman, a bribe, or months of confusion.</div>
+        <div class="quote-attr">— JanMitra Founding Principle</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-section" style="margin-top:80px">
+    <div class="stats-inner">
+      <div class="stat-item rv"><span class="stat-num" data-target="500">0</span><span class="stat-label">Schemes Listed</span></div>
+      <div class="stat-item rv" style="transition-delay:.1s"><span class="stat-num" data-target="28">0</span><span class="stat-label">States Covered</span></div>
+      <div class="stat-item rv" style="transition-delay:.2s"><span class="stat-num" data-target="100">0</span><span class="stat-label">Free Always (%)</span></div>
+      <div class="stat-item rv" style="transition-delay:.3s"><span class="stat-num">AI</span><span class="stat-label">Powered Guide</span></div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="section-header rv">
+      <span class="sec-eyebrow">What We Offer</span>
+      <h2 class="sec-h">Everything You Need to <em>Claim Your Rights</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card rv"><span class="feat-icon">🤖</span><div class="feat-name">AI Scheme Advisor</div><p class="feat-desc">Ask questions in plain language — our AI identifies which schemes you likely qualify for, explains them, and guides next steps.</p></div>
+      <div class="feat-card rv" style="transition-delay:.08s"><span class="feat-icon">✅</span><div class="feat-name">Instant Eligibility Check</div><p class="feat-desc">Fill a 2-minute form and get matched to relevant schemes based on income, caste, location, and your situation — instantly.</p></div>
+      <div class="feat-card rv" style="transition-delay:.16s"><span class="feat-icon">📋</span><div class="feat-name">Document Checklists</div><p class="feat-desc">Know exactly which documents to collect for each scheme. Download a checklist, track progress, and share via WhatsApp.</p></div>
+      <div class="feat-card rv" style="transition-delay:.24s"><span class="feat-icon">🏛️</span><div class="feat-name">500+ Verified Schemes</div><p class="feat-desc">Curated database of central and state government programs across housing, agriculture, health, education, and business.</p></div>
+      <div class="feat-card rv" style="transition-delay:.32s"><span class="feat-icon">🗺️</span><div class="feat-name">All of India</div><p class="feat-desc">Schemes from 28 states and union territories. Whether you're in a village in Bihar or a city in Maharashtra — JanMitra covers it.</p></div>
+      <div class="feat-card rv" style="transition-delay:.40s"><span class="feat-icon">🔒</span><div class="feat-name">Private & Free</div><p class="feat-desc">No fees, no hidden charges. Your data stays with you — we never share or sell your information. JanMitra is a public service.</p></div>
+    </div>
+  </div>
+
+  <div class="values">
+    <div class="values-inner">
+      <div class="section-header rv">
+        <span class="sec-eyebrow">Our Values</span>
+        <h2 class="sec-h">Designed Around <em>You</em></h2>
+      </div>
+      <div class="values-grid">
+        <div class="val-item rv"><div class="val-icon">🏆</div><div><div class="val-name">Citizen-First</div><div class="val-desc">Every design decision starts with: is this making it easier for an ordinary citizen?</div></div></div>
+        <div class="val-item rv" style="transition-delay:.07s"><div class="val-icon">🌍</div><div><div class="val-name">Universal Access</div><div class="val-desc">Works on basic smartphones with slow internet. Built for Bharat, not just metros.</div></div></div>
+        <div class="val-item rv" style="transition-delay:.14s"><div class="val-icon">🔍</div><div><div class="val-name">Transparency</div><div class="val-desc">We tell you sources, eligibility criteria, and limitations — no false promises.</div></div></div>
+        <div class="val-item rv" style="transition-delay:.21s"><div class="val-icon">⚡</div><div><div class="val-name">Speed</div><div class="val-desc">From question to answer in seconds. No forms, no login wall, no waiting rooms.</div></div></div>
+        <div class="val-item rv" style="transition-delay:.28s"><div class="val-icon">🔐</div><div><div class="val-name">Privacy</div><div class="val-desc">Your income details, caste, and location are only used for matching — never stored.</div></div></div>
+        <div class="val-item rv" style="transition-delay:.35s"><div class="val-icon">📝</div><div><div class="val-name">Literacy</div><div class="val-desc">Plain language explanations — no jargon, no bureaucratic text walls.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Ready to Find <em>Your</em> Schemes?</h2>
+    <p>Start with a quick eligibility check or just ask JanMitra a question.</p>
+    <div class="cta-btns">
+      <a href="index.html" class="btn-primary">Ask JanMitra AI</a>
+      <a href="eligibility.html" class="btn-outline">Check Eligibility</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fl">Jan<em>Mitra</em></div>
+    <ul class="flinks">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+    </ul>
+    <div class="fcp">Built for Bharat</div>
+  </footer>
+
+  <script>
+    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');if(e.target.querySelector('[data-target]')){e.target.querySelectorAll('[data-target]').forEach(countEl=>{const target=parseInt(countEl.dataset.target);let current=0;const step=Math.ceil(target/50);const timer=setInterval(()=>{current=Math.min(current+step,target);countEl.textContent=current+(target===100?'%':target===28?'':'+');if(current>=target)clearInterval(timer);},30);});}observer.unobserve(e.target);}});},{threshold:0.15});
+    document.querySelectorAll('.rv').forEach(el=>observer.observe(el));
+  </script>
+
+<script src="js/auth-gate.js"></script>
+<script src="js/lang-switcher.js"></script>
+<script>(function(){var u=JSON.parse(localStorage.getItem('jm_user')||'null');var el=document.getElementById('navAuth');if(!el)return;if(u){el.href='profile.html';el.title='View Profile';el.style.cssText='display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--nv);text-decoration:none;padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;transition:all .2s';el.innerHTML='<span style="width:24px;height:24px;background:var(--sf);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white">'+( (u.avatar||(u.name||'?').charAt(0)).toUpperCase())+'</span><span>'+( (u.name||'Me').split(' ')[0])+'</span>';}})();</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

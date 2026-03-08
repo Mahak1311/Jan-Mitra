@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Access — JanMitra (Light Mode)</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <!--
+    LOW-BANDWIDTH PAGE
+    No web fonts, no large images, no animations.
+    Total page weight target: < 12 KB HTML+CSS
+    Inline styles only — no external CSS files.
+  -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--bd:#DDD3C8;--ink:#0D1A26;--inm:#3A4F5E;--bg:#FFFFFF}
+    html{font-size:15px}
+    body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);max-width:700px;margin:0 auto;padding:0 14px 40px}
+
+    .tricolor{height:4px;background:linear-gradient(90deg,#D4611A 33.3%,#fff 33.3%,#fff 66.6%,#127A10 66.6%);margin-bottom:0}
+
+    header{padding:14px 0;border-bottom:2px solid var(--nv);display:flex;align-items:center;justify-content:space-between;margin-bottom:0}
+    .h-logo{font-family:Georgia,serif;font-size:22px;font-weight:bold;color:var(--nv);text-decoration:none}
+    .h-logo em{color:var(--sf);font-style:normal}
+    .h-badge{font-size:10px;background:var(--gr);color:white;padding:3px 8px;border-radius:3px;font-weight:bold;letter-spacing:.5px}
+
+    .save-bar{background:var(--gr);color:white;padding:8px 12px;font-size:12px;text-align:center;margin:0 -14px}
+
+    .nav-strip{display:flex;flex-wrap:wrap;gap:6px;padding:12px 0;border-bottom:1px solid var(--bd);margin-bottom:20px}
+    .nav-strip a{font-size:12px;color:var(--nv);font-weight:bold;text-decoration:none;padding:5px 10px;border:1px solid var(--bd);border-radius:4px}
+    .nav-strip a:hover{background:var(--nv);color:white}
+
+    /* Search */
+    .search-row{display:flex;gap:6px;margin-bottom:22px}
+    .search-input{flex:1;border:2px solid var(--bd);border-radius:5px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none}
+    .search-input:focus{border-color:var(--sf)}
+    .search-btn{background:var(--sf);color:white;border:none;padding:10px 18px;border-radius:5px;font-size:13px;font-weight:bold;cursor:pointer;font-family:inherit}
+    .search-btn:hover{background:var(--nv)}
+
+    /* Sections */
+    h2{font-family:Georgia,serif;font-size:17px;color:var(--nv);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--bd);display:flex;align-items:center;gap:8px}
+    h2 .cat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+    /* Scheme list */
+    .scheme-list{list-style:none;margin-bottom:28px}
+    .scheme-item{padding:12px 0;border-bottom:1px solid var(--bd)}
+    .scheme-item:last-child{border-bottom:none}
+    .scheme-name{font-weight:bold;color:var(--ink);font-size:14px}
+    .scheme-meta{font-size:12px;color:var(--inm);margin-top:3px;line-height:1.55}
+    .scheme-links{margin-top:7px;display:flex;flex-wrap:wrap;gap:8px}
+    .sl{font-size:12px;color:var(--sf);font-weight:bold;text-decoration:none}
+    .sl:hover{text-decoration:underline}
+    .sl.gr{color:var(--gr)}
+    .hidden-scheme{display:none}
+
+    /* Quick numbers */
+    .quick-nums{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:28px}
+    .qn{padding:12px;border:1px solid var(--bd);border-radius:5px;background:var(--cr)}
+    .qn-name{font-size:11px;font-weight:bold;color:var(--inm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+    .qn-num{font-size:16px;font-weight:bold;color:var(--nv)}
+    .qn-desc{font-size:11px;color:var(--inm);margin-top:2px}
+
+    /* Other access */
+    .access-list{list-style:none;margin-bottom:28px}
+    .access-list li{padding:10px 0;border-bottom:1px solid var(--bd);font-size:13px;display:flex;gap:10px;align-items:flex-start}
+    .access-list li:last-child{border-bottom:none}
+    .ac-icon{font-size:18px;flex-shrink:0;line-height:1.1}
+    .ac-text a{color:var(--sf);font-weight:bold;text-decoration:none}
+    .ac-text a:hover{text-decoration:underline}
+
+    /* Footer */
+    footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--bd);font-size:11px;color:var(--inm);text-align:center;line-height:1.8}
+    footer a{color:var(--sf);text-decoration:none}
+  </style>
+</head>
+<body>
+<div class="tricolor"></div>
+<div class="save-bar">📶 Light page — optimised for slow or limited connections. No images or heavy content loaded.</div>
+
+<header>
+  <a href="index.html" class="h-logo">Jan<em>Mitra</em></a>
+  <span class="h-badge">LOW BANDWIDTH</span>
+</header>
+
+<nav class="nav-strip">
+  <a href="index.html">Home</a>
+  <a href="schemes.html">All Schemes</a>
+  <a href="eligibility.html">Check Eligibility</a>
+  <a href="checklist.html">Documents</a>
+  <a href="chat.html">AI Chat</a>
+  <a href="about.html">About</a>
+</nav>
+
+<!-- Search -->
+<div class="search-row">
+  <input class="search-input" type="text" id="searchInput" placeholder="Search schemes (e.g. housing, farmer, health…)" oninput="filterSchemes(this.value)">
+  <button class="search-btn" onclick="filterSchemes(document.getElementById('searchInput').value)">Search</button>
+</div>
+
+<!-- Population schemes top 10 -->
+<h2><span class="cat-dot" style="background:#D4611A"></span>Housing &amp; Infrastructure</h2>
+<ul class="scheme-list" id="schemeList">
+  <li class="scheme-item" data-tags="housing awas home pucca">
+    <div class="scheme-name">Pradhan Mantri Awas Yojana (PMAY)</div>
+    <div class="scheme-meta">Houses for all — Urban &amp; Rural. Subsidy up to ₹2.67 lakh on home loans for EWS/LIG.<br>Who: BPL families, no pucca house, income &lt; ₹18 lakh/year</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=pmay" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=pmay" class="sl gr">Document Checklist</a> <a href="chat.html?q=pmay" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="farmer kisan agriculture crop">
+    <div class="scheme-name">PM-KISAN</div>
+    <div class="scheme-meta">₹6,000/year direct income support to small &amp; marginal farmers in 3 instalments.<br>Who: All farmer families with cultivable land</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=pmkisan" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=pmkisan" class="sl gr">Document Checklist</a> <a href="chat.html?q=pmkisan" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="health ayushman hospital insurance">
+    <div class="scheme-name">Ayushman Bharat — PM-JAY</div>
+    <div class="scheme-meta">Health cover up to ₹5 lakh per family per year for secondary &amp; tertiary hospitalisation.<br>Who: ~12 crore poor &amp; vulnerable families</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=pmjay" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=pmjay" class="sl gr">Document Checklist</a> <a href="chat.html?q=health" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="scholarship education student obc sc st">
+    <div class="scheme-name">National Scholarship Portal (NSP)</div>
+    <div class="scheme-meta">Pre &amp; post-matric scholarship for SC/ST/OBC/Minority/EWS students from Class 1 to PhD.<br>Who: Students with family income &lt; ₹2.5–8 lakh depending on category</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=nsp" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=nsp" class="sl gr">Document Checklist</a> <a href="chat.html?q=scholarship" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="loan mudra business self employed entrepreneur">
+    <div class="scheme-name">PM Mudra Yojana</div>
+    <div class="scheme-meta">Collateral-free loans ₹10k–₹10 lakh for non-farm micro-enterprises under Shishu, Kishore, Tarun tiers.<br>Who: Entrepreneurs, small business, artisans</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=mudra" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=mudra" class="sl gr">Document Checklist</a> <a href="chat.html?q=mudra" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="pension old age atal">
+    <div class="scheme-name">Atal Pension Yojana (APY)</div>
+    <div class="scheme-meta">Guaranteed monthly pension ₹1,000–₹5,000 from age 60. Government co-contributes 50% of contribution for 5 yrs.<br>Who: 18–40 yr unorganised sector workers</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=apy" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=apy" class="sl gr">Document Checklist</a> <a href="chat.html?q=pension" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="women maternity pregnancy child">
+    <div class="scheme-name">Pradhan Mantri Matru Vandana Yojana (PMMVY)</div>
+    <div class="scheme-meta">₹5,000 maternity benefit in 3 instalments for first live birth registered against Aadhaar.<br>Who: Pregnant &amp; lactating women for first child</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=pmmvy" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=pmmvy" class="sl gr">Document Checklist</a> <a href="chat.html?q=maternity" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="cooking gas lpg cylinder ujjwala">
+    <div class="scheme-name">Pradhan Mantri Ujjwala Yojana (PMUY)</div>
+    <div class="scheme-meta">Free LPG connection with ₹1,600 financial aid for BPL, SC/ST, PMAY beneficiaries.<br>Who: Women from BPL households</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=pmuy" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=pmuy" class="sl gr">Document Checklist</a> <a href="chat.html?q=ujjwala" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="toilet sanitation open defecation free swachh">
+    <div class="scheme-name">Swachh Bharat Mission (Toilet Subsidy)</div>
+    <div class="scheme-meta">₹12,000 grant for construction of individual household toilets in rural areas.<br>Who: BPL households, SC/ST, small &amp; marginal farmers without toilet</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=sbm" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=sbm" class="sl gr">Document Checklist</a> <a href="chat.html?q=swachh" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+  <li class="scheme-item" data-tags="electricity solar power connection saubhagya">
+    <div class="scheme-name">Pradhan Mantri Sahaj Bijli Har Ghar Yojana (Saubhagya)</div>
+    <div class="scheme-meta">Free electricity connection to all unelectrified BPL households; ₹500 deposit for APL.<br>Who: Rural unelectrified households</div>
+    <div class="scheme-links"><a href="eligibility.html?scheme=saubhagya" class="sl">Check Eligibility</a> <a href="checklist.html?scheme=saubhagya" class="sl gr">Document Checklist</a> <a href="chat.html?q=electricity" class="sl" style="color:var(--nv)">Ask AI</a></div>
+  </li>
+</ul>
+
+<div id="noResults" style="display:none;padding:14px;background:#FFF3CD;border:1px solid #F0C040;border-radius:5px;font-size:13px;margin-bottom:20px">
+  No schemes found for "<span id="noResultsTerm"></span>". <a href="chat.html" style="color:var(--sf);font-weight:bold">Ask the AI instead →</a>
+</div>
+
+<!-- Quick helpline numbers -->
+<h2><span class="cat-dot" style="background:#127A10"></span>Quick Helpline Numbers</h2>
+<div class="quick-nums">
+  <div class="qn"><div class="qn-name">PM-KISAN</div><div class="qn-num">155261</div><div class="qn-desc">Farmer helpline (Mon–Sat)</div></div>
+  <div class="qn"><div class="qn-name">PM-JAY (Ayushman)</div><div class="qn-num">14555</div><div class="qn-desc">Health scheme helpline</div></div>
+  <div class="qn"><div class="qn-name">PMAY Urban</div><div class="qn-num">1800-11-3377</div><div class="qn-desc">Housing scheme (toll-free)</div></div>
+  <div class="qn"><div class="qn-name">NSP Scholarships</div><div class="qn-num">0120-6619540</div><div class="qn-desc">Scholarship portal helpdesk</div></div>
+  <div class="qn"><div class="qn-name">MUDRA Loan</div><div class="qn-num">1800-180-1111</div><div class="qn-desc">MSME loan queries</div></div>
+  <div class="qn"><div class="qn-name">General CSC</div><div class="qn-num">1800-121-3468</div><div class="qn-desc">Common Service Centres</div></div>
+</div>
+
+<!-- Other access channels -->
+<h2><span class="cat-dot" style="background:#0C2340"></span>Other Ways to Access JanMitra</h2>
+<ul class="access-list">
+  <li>
+    <span class="ac-icon">💬</span>
+    <div class="ac-text"><strong>AI Chat (full version)</strong> — Ask anything about schemes, eligibility, documents.<br><a href="chat.html">Open JanMitra Chat →</a></div>
+  </li>
+  <li>
+    <span class="ac-icon">📱</span>
+    <div class="ac-text"><strong>WhatsApp &amp; SMS</strong> — Works without internet browser. Send keywords like AWAS, KISAN, HEALTH to our number.<br><a href="whatsapp.html">Learn how to use WhatsApp →</a></div>
+  </li>
+  <li>
+    <span class="ac-icon">🎙️</span>
+    <div class="ac-text"><strong>Voice Input</strong> — No typing needed. Speak your question in Hindi, Bengali, Tamil and more.<br><a href="voice.html">Try Voice Access →</a></div>
+  </li>
+  <li>
+    <span class="ac-icon">✅</span>
+    <div class="ac-text"><strong>Document Checklist</strong> — Know exactly which papers you need before visiting the office.<br><a href="checklist.html">View Checklists →</a></div>
+  </li>
+  <li>
+    <span class="ac-icon">📋</span>
+    <div class="ac-text"><strong>Eligibility Checker</strong> — Step-by-step form to find which schemes you qualify for.<br><a href="eligibility.html">Check Eligibility →</a></div>
+  </li>
+</ul>
+
+<footer>
+  <strong>JanMitra</strong> — Free government scheme guidance for every Indian<br>
+  <a href="index.html">Home</a> · <a href="about.html">About</a> · <a href="chat.html">AI Chat</a> · <a href="schemes.html">All Schemes</a><br>
+  This page loads under 12 KB with no images or external fonts for best performance on slow connections.
+</footer>
+
+<script>
+  function filterSchemes(q) {
+    q = q.trim().toLowerCase();
+    const items = document.querySelectorAll('.scheme-item');
+    let shown = 0;
+    items.forEach(function(item) {
+      var tags = (item.dataset.tags || '') + ' ' + item.textContent.toLowerCase();
+      if (!q || tags.indexOf(q) !== -1) {
+        item.style.display = '';
+        shown++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    var nr = document.getElementById('noResults');
+    if (q && shown === 0) {
+      nr.style.display = 'block';
+      document.getElementById('noResultsTerm').textContent = q;
+    } else {
+      nr.style.display = 'none';
+    }
+  }
+</script>
+
+<script src="js/lang-switcher.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

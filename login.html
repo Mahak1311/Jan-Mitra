@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — JanMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Tiro+Devanagari+Hindi&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script async src="https://accounts.google.com/gsi/client"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--nvm:#163656;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10);--red:#D32F2F;--google:#4285F4;--wh:#FFFFFF}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+
+    /* ── NAV ── */
+    nav{background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-back{font-size:12px;font-weight:600;color:var(--inm);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s}
+    .nav-back:hover{color:var(--sf)}
+
+    /* ── MAIN LAYOUT ── */
+    .page-wrap{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 68px)}
+
+    /* ── LEFT PANEL ── */
+    .left-panel{background:var(--nv);padding:60px 8%;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+    .left-panel::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 60%,rgba(212,97,26,.2),transparent 55%);pointer-events:none}
+    .left-panel::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+    .lp-inner{position:relative;z-index:1}
+    .lp-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sfb);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+    .lp-eyebrow::before{content:'';width:24px;height:2px;background:var(--sfb)}
+    .lp-heading{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,3vw,46px);color:white;line-height:1.1;margin-bottom:16px}
+    .lp-heading em{color:var(--sfb);font-style:normal}
+    .lp-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;font-weight:300;margin-bottom:44px;max-width:380px}
+    .lp-features{display:flex;flex-direction:column;gap:18px}
+    .lpf{display:flex;align-items:flex-start;gap:14px}
+    .lpf-icon{width:40px;height:40px;border-radius:8px;background:rgba(212,97,26,.2);border:1.5px solid rgba(212,97,26,.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+    .lpf-text{padding-top:3px}
+    .lpf-title{font-size:13.5px;font-weight:700;color:white;margin-bottom:3px}
+    .lpf-desc{font-size:12px;color:rgba(255,255,255,.42);line-height:1.5}
+    .lp-hindi{font-family:'Tiro Devanagari Hindi',serif;font-size:13px;color:rgba(255,255,255,.25);margin-top:44px}
+
+    /* ── RIGHT PANEL (AUTH CARD) ── */
+    .right-panel{display:flex;align-items:center;justify-content:center;padding:40px 6%}
+    .auth-card{width:100%;max-width:440px}
+    .auth-tabs{display:flex;background:white;border-radius:10px;border:1.5px solid var(--bd);padding:4px;margin-bottom:28px;box-shadow:0 2px 10px rgba(12,35,64,.065)}
+    .auth-tab{flex:1;padding:10px;border:none;background:transparent;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--inm);cursor:pointer;transition:all .22s}
+    .auth-tab.active{background:var(--nv);color:white;box-shadow:0 2px 10px rgba(12,35,64,.25)}
+    .auth-heading{font-family:'Playfair Display',serif;font-weight:900;font-size:28px;color:var(--nv);margin-bottom:6px}
+    .auth-sub{font-size:13.5px;color:var(--inl);margin-bottom:28px;line-height:1.6}
+    .auth-sub a{color:var(--sf);text-decoration:none;font-weight:600}
+    .auth-sub a:hover{text-decoration:underline}
+
+    /* Social login buttons */
+    .socials{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+    .soc-btn{width:100%;padding:13px 18px;border-radius:9px;border:1.5px solid var(--bd);background:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .22s;text-decoration:none;position:relative}
+    .soc-btn:hover{border-color:var(--nv);background:#f8f9ff;transform:translateY(-1px);box-shadow:0 4px 16px rgba(12,35,64,.10)}
+    .soc-icon{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+    .soc-label{flex:1}
+    .soc-badge{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(--sf);color:white;padding:2px 7px;border-radius:4px}
+    .digi-btn{border-color:#023068;background:linear-gradient(135deg,#023068 0%,#0a4fa0 100%);color:white}
+    .digi-btn:hover{border-color:#023068;background:linear-gradient(135deg,#01235a 0%,#083d80 100%)}
+
+    /* Divider */
+    .divider{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .div-line{flex:1;height:1px;background:var(--bd)}
+    .div-text{font-size:11px;font-weight:600;color:var(--inl);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+
+    /* Form fields */
+    .field{margin-bottom:16px}
+    .field-label{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--inm);margin-bottom:6px;display:block}
+    .fld{width:100%;padding:12px 14px;border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:white;transition:border-color .2s,box-shadow .2s;outline:none}
+    .fld:focus{border-color:var(--sf);box-shadow:0 0 0 3px rgba(212,97,26,.1)}
+    .fld.error{border-color:var(--red)}
+    .fld-err{font-size:11.5px;color:var(--red);margin-top:5px;display:none}
+    .fld.error + .fld-err{display:block}
+    .phone-row{display:flex;gap:8px}
+    .phone-prefix{width:80px;padding:12px 10px;border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:white;outline:none;cursor:pointer}
+    .phone-prefix:focus{border-color:var(--sf);box-shadow:0 0 0 3px rgba(212,97,26,.1)}
+    .phone-input{flex:1}
+    .forgot{font-size:12px;color:var(--sf);text-decoration:none;font-weight:600;float:right;margin-top:4px}
+    .forgot:hover{text-decoration:underline}
+
+    /* OTP panel */
+    #otpPanel{display:none}
+    .otp-row{display:flex;gap:10px;margin-bottom:8px}
+    .otp-digit{flex:1;padding:14px 6px;border:1.5px solid var(--bd);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;color:var(--nv);text-align:center;background:white;outline:none;transition:border-color .2s,box-shadow .2s}
+    .otp-digit:focus{border-color:var(--sf);box-shadow:0 0 0 3px rgba(212,97,26,.1)}
+    .otp-hint{font-size:12px;color:var(--inl);margin-bottom:18px}
+    .otp-hint span{color:var(--sf);font-weight:600;cursor:pointer}
+    .otp-hint span:hover{text-decoration:underline}
+
+    /* Checkbox */
+    .chk-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px}
+    .chk-row input{margin-top:3px;accent-color:var(--sf);width:16px;height:16px;cursor:pointer}
+    .chk-text{font-size:12.5px;color:var(--inm);line-height:1.5}
+    .chk-text a{color:var(--sf);text-decoration:none;font-weight:600}
+    .chk-text a:hover{text-decoration:underline}
+
+    /* Submit button */
+    .btn-submit{width:100%;padding:14px;border:none;border-radius:9px;background:var(--sf);color:white;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .25s;letter-spacing:.3px}
+    .btn-submit:hover{background:var(--nv);transform:translateY(-1px);box-shadow:0 8px 24px rgba(12,35,64,.2)}
+    .btn-submit:disabled{background:var(--inl);cursor:not-allowed;transform:none;box-shadow:none}
+
+    /* Trust bar */
+    .trust-bar{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:20px;padding-top:18px;border-top:1px solid var(--bd)}
+    .tb-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--inl);font-weight:500}
+    .tb-icon{font-size:13px}
+
+    /* Panel switching */
+    .auth-panel{display:none}
+    .auth-panel.active{display:block;animation:fadeUp .3s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Success screen */
+    #successScreen{display:none;text-align:center;padding:20px 0}
+    .success-icon{font-size:52px;margin-bottom:16px;display:block}
+    .success-title{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;color:var(--nv);margin-bottom:8px}
+    .success-sub{font-size:14px;color:var(--inl);line-height:1.6;margin-bottom:28px}
+    .btn-profile{display:inline-block;padding:13px 30px;background:var(--sf);color:white;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;text-decoration:none;transition:all .22s}
+    .btn-profile:hover{background:var(--nv);transform:translateY(-1px)}
+
+    /* Password strength */
+    .strength-bar{height:3px;border-radius:3px;margin-top:6px;background:var(--bd);overflow:hidden}
+    .strength-fill{height:100%;border-radius:3px;width:0;transition:width .3s,background .3s}
+
+    /* Responsive */
+    @media(max-width:768px){
+      .page-wrap{grid-template-columns:1fr}
+      .left-panel{display:none}
+      .right-panel{padding:32px 5%}
+    }
+  </style>
+</head>
+<body>
+<div class="tricolor"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+    <span class="logo-wm">Jan<em>Mitra</em></span>
+  </a>
+  <a href="javascript:history.back()" class="nav-back">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Go Back
+  </a>
+</nav>
+
+<div class="page-wrap">
+  <!-- ── LEFT PANEL ─────────────────────────────────────── -->
+  <div class="left-panel">
+    <div class="lp-inner">
+      <div class="lp-eyebrow">Your JanMitra Account</div>
+      <h1 class="lp-heading">One Login.<br><em>All of India's</em><br>Schemes.</h1>
+      <p class="lp-sub">Save your profile, track scheme applications, get personalised recommendations, and pick up right where you left off — on any device.</p>
+      <div class="lp-features">
+        <div class="lpf">
+          <div class="lpf-icon">🏆</div>
+          <div class="lpf-text">
+            <div class="lpf-title">Track Your Applications</div>
+            <div class="lpf-desc">Monitor status of every scheme you've saved, applied for, or been approved for.</div>
+          </div>
+        </div>
+        <div class="lpf">
+          <div class="lpf-icon">🎯</div>
+          <div class="lpf-text">
+            <div class="lpf-title">Personalised Recommendations</div>
+            <div class="lpf-desc">AI matches schemes based on your saved profile — income, state, category &amp; more.</div>
+          </div>
+        </div>
+        <div class="lpf">
+          <div class="lpf-icon">📋</div>
+          <div class="lpf-text">
+            <div class="lpf-title">Saved Checklists</div>
+            <div class="lpf-desc">Document preparation checklists sync across devices so nothing gets lost.</div>
+          </div>
+        </div>
+        <div class="lpf">
+          <div class="lpf-icon">🔐</div>
+          <div class="lpf-text">
+            <div class="lpf-title">Privacy First</div>
+            <div class="lpf-desc">Your data is never sold or shared. Aadhaar details stay on your device.</div>
+          </div>
+        </div>
+      </div>
+      <p class="lp-hindi">आपका डेटा, आपका अधिकार।</p>
+    </div>
+  </div>
+
+  <!-- ── RIGHT PANEL ────────────────────────────────────── -->
+  <div class="right-panel">
+    <div class="auth-card">
+
+      <!-- Tab switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login',this)">Sign In</button>
+        <button class="auth-tab" onclick="switchTab('register',this)">Create Account</button>
+      </div>
+
+      <!-- ── SUCCESS SCREEN ── -->
+      <div id="successScreen">
+        <span class="success-icon">🎉</span>
+        <div class="success-title" id="successTitle">Welcome back!</div>
+        <p class="success-sub" id="successSub">You're signed in. Redirecting to your profile…</p>
+        <a href="profile.html" class="btn-profile">Go to My Profile →</a>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           SIGN IN PANEL
+      ═══════════════════════════════════════════════ -->
+      <div class="auth-panel active" id="panelLogin">
+        <h2 class="auth-heading">Welcome back</h2>
+        <p class="auth-sub">New to JanMitra? <a href="#" onclick="switchTab('register',document.querySelectorAll('.auth-tab')[1])">Create a free account →</a></p>
+
+        <!-- Social logins -->
+        <div class="socials">
+          <!-- DigiLocker -->
+          <button class="soc-btn digi-btn" onclick="socialLogin('digilocker')">
+            <div class="soc-icon">
+              <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="6" fill="#023068"/><path d="M10 12h20v3H10z" fill="#fff" opacity=".5"/><path d="M10 18h14v10H10z" fill="#fff"/><path d="M26 18h4v4l-4 2v-6z" fill="#f07030"/><circle cx="17" cy="23" r="2" fill="#023068"/></svg>
+            </div>
+            <span class="soc-label">Continue with DigiLocker</span>
+            <span class="soc-badge">Govt. ID</span>
+          </button>
+          <!-- Google -->
+          <button class="soc-btn" id="googleSignInBtn" onclick="triggerGoogleSignIn()">
+            <div class="soc-icon">
+              <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9L37 9.7C33.7 6.8 29.1 5 24 5 12.9 5 4 13.9 4 25s8.9 20 20 20c11 0 19.3-7.7 19.3-19.7 0-1.2-.1-2.2-.3-3.3H43.6z"/><path fill="#FF3D00" d="M6.3 15.2l6.6 4.8C14.6 16.9 19 14 24 14c3 0 5.7 1.1 7.8 2.9L37 9.7C33.7 6.8 29.1 5 24 5c-7.7 0-14.3 4.4-17.7 10.2z"/><path fill="#4CAF50" d="M24 45c5 0 9.5-1.7 13-4.6l-6-5c-2 1.5-4.6 2.4-7 2.4-5.2 0-9.6-3.1-11.3-7.6l-6.5 5C7.7 40.6 15.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.4 4.3-4.5 5.6l6 5C40.3 35.6 43.3 30.7 43.3 25c0-1.2-.1-2.2-.3-3.3H43.6z"/></svg>
+            </div>
+            <span class="soc-label">Continue with Google</span>
+          </button>
+          <!-- Phone OTP -->
+          <button class="soc-btn" onclick="showPhoneLogin()">
+            <div class="soc-icon">📱</div>
+            <span class="soc-label">Continue with Phone (OTP)</span>
+          </button>
+        </div>
+
+        <div class="divider"><div class="div-line"></div><span class="div-text">or use email</span><div class="div-line"></div></div>
+
+        <!-- Email form -->
+        <div id="emailLoginForm">
+          <div class="field">
+            <label class="field-label">Email Address</label>
+            <input class="fld" type="email" id="li_email" placeholder="you@example.com" autocomplete="email">
+            <div class="fld-err">Please enter a valid email</div>
+          </div>
+          <div class="field">
+            <label class="field-label" style="display:flex;justify-content:space-between;align-items:center">
+              Password
+              <a href="#" class="forgot">Forgot password?</a>
+            </label>
+            <input class="fld" type="password" id="li_pass" placeholder="Your password" autocomplete="current-password">
+            <div class="fld-err">Password is required</div>
+          </div>
+          <button class="btn-submit" onclick="handleEmailLogin()">Sign In →</button>
+        </div>
+
+        <!-- Phone OTP form (hidden by default) -->
+        <div id="phoneLoginForm" style="display:none">
+          <div class="field">
+            <label class="field-label">Mobile Number</label>
+            <div class="phone-row">
+              <select class="phone-prefix" id="li_cc">
+                <option value="+91">🇮🇳 +91</option>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+971">🇦🇪 +971</option>
+              </select>
+              <input class="fld phone-input" type="tel" id="li_phone" placeholder="9876543210" maxlength="10" autocomplete="tel">
+            </div>
+          </div>
+          <div id="otpPanel">
+            <label class="field-label" style="margin-bottom:10px">Enter OTP sent to your number</label>
+            <div class="otp-row">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,0)">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,1)">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,2)">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,3)">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,4)">
+              <input class="otp-digit" type="text" maxlength="1" inputmode="numeric" oninput="otpNext(this,5)">
+            </div>
+            <p class="otp-hint">Didn't receive it? <span onclick="resendOtp()">Resend OTP</span> · <span onclick="showPhoneLogin()">Change number</span></p>
+            <button class="btn-submit" onclick="verifyOtp()">Verify &amp; Sign In →</button>
+          </div>
+          <div id="sendOtpWrap">
+            <button class="btn-submit" onclick="sendOtp()">Send OTP →</button>
+          </div>
+          <p style="margin-top:12px;font-size:12px;color:var(--inl);text-align:center"><a href="#" onclick="document.getElementById('phoneLoginForm').style.display='none';document.getElementById('emailLoginForm').style.display='block'" style="color:var(--sf);font-weight:600">Use email instead</a></p>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════
+           REGISTER PANEL
+      ═══════════════════════════════════════════════ -->
+      <div class="auth-panel" id="panelRegister">
+        <h2 class="auth-heading">Create Account</h2>
+        <p class="auth-sub">Already registered? <a href="#" onclick="switchTab('login',document.querySelectorAll('.auth-tab')[0])">Sign in →</a></p>
+
+        <div class="socials">
+          <button class="soc-btn digi-btn" onclick="socialLogin('digilocker')">
+            <div class="soc-icon">
+              <svg width="22" height="22" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="6" fill="#023068"/><path d="M10 12h20v3H10z" fill="#fff" opacity=".5"/><path d="M10 18h14v10H10z" fill="#fff"/><path d="M26 18h4v4l-4 2v-6z" fill="#f07030"/><circle cx="17" cy="23" r="2" fill="#023068"/></svg>
+            </div>
+            <span class="soc-label">Register via DigiLocker</span>
+            <span class="soc-badge">Fastest</span>
+          </button>
+          <button class="soc-btn" id="googleRegisterBtn" onclick="triggerGoogleSignIn()">
+            <div class="soc-icon">
+              <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9L37 9.7C33.7 6.8 29.1 5 24 5 12.9 5 4 13.9 4 25s8.9 20 20 20c11 0 19.3-7.7 19.3-19.7 0-1.2-.1-2.2-.3-3.3H43.6z"/><path fill="#FF3D00" d="M6.3 15.2l6.6 4.8C14.6 16.9 19 14 24 14c3 0 5.7 1.1 7.8 2.9L37 9.7C33.7 6.8 29.1 5 24 5c-7.7 0-14.3 4.4-17.7 10.2z"/><path fill="#4CAF50" d="M24 45c5 0 9.5-1.7 13-4.6l-6-5c-2 1.5-4.6 2.4-7 2.4-5.2 0-9.6-3.1-11.3-7.6l-6.5 5C7.7 40.6 15.3 45 24 45z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.4 4.3-4.5 5.6l6 5C40.3 35.6 43.3 30.7 43.3 25c0-1.2-.1-2.2-.3-3.3H43.6z"/></svg>
+            </div>
+            <span class="soc-label">Register with Google</span>
+          </button>
+        </div>
+
+        <div class="divider"><div class="div-line"></div><span class="div-text">or use email</span><div class="div-line"></div></div>
+
+        <div class="field">
+          <label class="field-label">Full Name</label>
+          <input class="fld" type="text" id="reg_name" placeholder="Ramesh Kumar" autocomplete="name">
+          <div class="fld-err">Please enter your name</div>
+        </div>
+        <div class="field">
+          <label class="field-label">Mobile Number</label>
+          <div class="phone-row">
+            <select class="phone-prefix" id="reg_cc"><option value="+91">🇮🇳 +91</option></select>
+            <input class="fld phone-input" type="tel" id="reg_phone" placeholder="9876543210" maxlength="10">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Email Address</label>
+          <input class="fld" type="email" id="reg_email" placeholder="you@example.com" autocomplete="email">
+          <div class="fld-err">Please enter a valid email</div>
+        </div>
+        <div class="field">
+          <label class="field-label">Password</label>
+          <input class="fld" type="password" id="reg_pass" placeholder="At least 8 characters" autocomplete="new-password" oninput="checkStrength(this.value)">
+          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+          <div class="fld-err">Password must be at least 8 characters</div>
+        </div>
+        <div class="field">
+          <label class="field-label">State</label>
+          <select class="fld" id="reg_state">
+            <option value="">Select your state…</option>
+            <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option><option>Chhattisgarh</option><option>Delhi</option><option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option><option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option><option>Odisha</option><option>Punjab</option><option>Rajasthan</option><option>Tamil Nadu</option><option>Telangana</option><option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+          </select>
+        </div>
+        <div class="chk-row">
+          <input type="checkbox" id="reg_terms">
+          <span class="chk-text">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. My data is used only for scheme matching.</span>
+        </div>
+        <button class="btn-submit" onclick="handleRegister()">Create Account →</button>
+      </div>
+
+      <!-- Trust bar -->
+      <div class="trust-bar">
+        <div class="tb-item"><span class="tb-icon">🔒</span> SSL Secured</div>
+        <div class="tb-item"><span class="tb-icon">🇮🇳</span> Govt. Scheme Data</div>
+        <div class="tb-item"><span class="tb-icon">🛡️</span> No Data Sharing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── API base ──────────────────────────────────────────────────────
+  const API_BASE = '/api/auth';
+
+  async function apiFetch(path, opts = {}) {
+    const token = localStorage.getItem('jm_token');
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    Object.assign(headers, opts.headers || {});
+    const res = await fetch(API_BASE + path, { ...opts, headers });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const msg = data.error || data.message || (data.errors && data.errors[0]?.msg) || 'Request failed';
+      const err = new Error(msg);
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  }
+
+  function storeSession(token, user) {
+    localStorage.setItem('jm_token', token);
+    localStorage.setItem('jm_user', JSON.stringify({
+      name:   user.name || '',
+      email:  user.email || '',
+      phone:  user.phone || '',
+      state:  user.profile?.state || '',
+      joined: user.createdAt || new Date().toISOString(),
+      avatar: (user.name || '?').charAt(0).toUpperCase()
+    }));
+  }
+
+  // ── Tab switching ─────────────────────────────────────────────────
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(tab === 'login' ? 'panelLogin' : 'panelRegister').classList.add('active');
+  }
+
+  // ── Social / DigiLocker ───────────────────────────────────────────
+  function socialLogin(provider) {
+    const names = { digilocker: 'DigiLocker' };
+    showToast(`${names[provider] || provider} sign-in is coming soon. Please use email & password for now.`, '#0C2340');
+  }
+
+  // ── Google Identity Services ───────────────────────────────────────────
+  let _gisReady = false;
+
+  // GIS fires this callback when its script is fully loaded
+  window.onGoogleLibraryLoad = function() {
+    _gisReady = true;
+    _setupGIS();
+  };
+
+  async function _setupGIS() {
+    let clientId;
+    try {
+      const r = await fetch('/api/auth/google/client-id');
+      const d = await r.json();
+      clientId = d.clientId;
+    } catch (e) { return; }
+    if (!clientId) return;
+
+    google.accounts.id.initialize({
+      client_id: clientId,
+      callback: handleGoogleCredential,
+      auto_select: false
+    });
+    _gisReady = clientId; // store for triggerGoogleSignIn
+  }
+
+  function triggerGoogleSignIn() {
+    if (!window.google || !window.google.accounts) {
+      showToast('Google sign-in is loading… please try again in a moment.', '#0C2340');
+      return;
+    }
+    if (!_gisReady) {
+      showToast('Google sign-in is not configured on this server.', '#0C2340');
+      return;
+    }
+    google.accounts.id.prompt(notification => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // One-Tap suppressed — open the full account picker popup
+        const clientId = _gisReady;
+        const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(window.location.origin + '/api/auth/google/popup-callback')}&response_type=token&scope=openid%20email%20profile&prompt=select_account`;
+        const popup = window.open(url, 'googleSignIn', 'width=500,height=600,left=200,top=100');
+        window._googlePopup = popup;
+      }
+    });
+  }
+
+  async function handleGoogleCredential(response) {
+    try {
+      const data = await apiFetch('/google', {
+        method: 'POST',
+        body: JSON.stringify({ credential: response.credential })
+      });
+      storeSession(data.token, data.user);
+      showSuccess('Signed in with Google!', `Welcome, ${data.user.name}! Redirecting…`);
+    } catch (err) {
+      showToast(err.message || 'Google sign-in failed. Please try again.', '#D32F2F');
+    }
+  }
+
+  // ── Phone OTP flow (requires SMS gateway integration) ─────────────
+  function showPhoneLogin() {
+    document.getElementById('emailLoginForm').style.display = 'none';
+    document.getElementById('phoneLoginForm').style.display = 'block';
+    document.getElementById('otpPanel').style.display = 'none';
+    document.getElementById('sendOtpWrap').style.display = 'block';
+  }
+
+  function sendOtp() {
+    showToast('Phone OTP sign-in is coming soon. Please use email & password for now.', '#0C2340');
+  }
+
+  function otpNext(input, idx) {
+    input.value = input.value.replace(/\D/g, '');
+    const digits = document.querySelectorAll('.otp-digit');
+    if (input.value && idx < 5) digits[idx + 1].focus();
+    if (!input.value && idx > 0) digits[idx - 1].focus();
+  }
+
+  function verifyOtp() {
+    showToast('Phone OTP sign-in is coming soon.', '#0C2340');
+  }
+
+  function resendOtp() {
+    showToast('Phone OTP sign-in is coming soon.', '#0C2340');
+  }
+
+  // ── Email login (real API) ────────────────────────────────────────
+  async function handleEmailLogin() {
+    const email = document.getElementById('li_email').value.trim();
+    const pass  = document.getElementById('li_pass').value;
+    let valid = true;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('li_email').classList.add('error'); valid = false;
+    } else document.getElementById('li_email').classList.remove('error');
+    if (!pass) {
+      document.getElementById('li_pass').classList.add('error'); valid = false;
+    } else document.getElementById('li_pass').classList.remove('error');
+    if (!valid) return;
+
+    const btn = document.querySelector('#emailLoginForm .btn-submit');
+    btn.disabled = true; btn.textContent = 'Signing in…';
+
+    try {
+      const data = await apiFetch('/login', { method: 'POST', body: JSON.stringify({ email, password: pass }) });
+      storeSession(data.token, data.user);
+      showSuccess('Welcome back!', `Signed in as ${data.user.name}. Redirecting…`);
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Sign In →';
+      if (err.status === 401) {
+        showToast('Incorrect email or password. Please try again.', '#D32F2F');
+      } else {
+        showToast(err.message || 'Sign in failed. Is the server running?', '#D32F2F');
+      }
+    }
+  }
+
+  // ── Register (real API) ───────────────────────────────────────────
+  async function handleRegister() {
+    const name  = document.getElementById('reg_name').value.trim();
+    const phone = document.getElementById('reg_phone').value.trim();
+    const email = document.getElementById('reg_email').value.trim();
+    const pass  = document.getElementById('reg_pass').value;
+    const state = document.getElementById('reg_state').value;
+    const terms = document.getElementById('reg_terms').checked;
+
+    let valid = true;
+    if (!name)  { document.getElementById('reg_name').classList.add('error');  valid = false; }
+    else          document.getElementById('reg_name').classList.remove('error');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('reg_email').classList.add('error'); valid = false;
+    } else document.getElementById('reg_email').classList.remove('error');
+    if (pass.length < 6) {
+      document.getElementById('reg_pass').classList.add('error'); valid = false;
+    } else document.getElementById('reg_pass').classList.remove('error');
+    if (!terms) { showToast('Please accept the Terms of Service to continue.', '#D32F2F'); return; }
+    if (!valid) return;
+
+    const btn = document.querySelector('#panelRegister .btn-submit');
+    btn.disabled = true; btn.textContent = 'Creating account…';
+
+    try {
+      const data = await apiFetch('/register', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password: pass, phone })
+      });
+      storeSession(data.token, data.user);
+
+      // Save state to profile right away if selected
+      if (state) {
+        await apiFetch('/profile', {
+          method: 'PUT',
+          headers: { 'Authorization': 'Bearer ' + data.token },
+          body: JSON.stringify({ profile: { state } })
+        }).catch(() => {});
+        const cached = JSON.parse(localStorage.getItem('jm_user') || '{}');
+        cached.state = state;
+        localStorage.setItem('jm_user', JSON.stringify(cached));
+      }
+
+      showSuccess(`Welcome, ${name.split(' ')[0]}!`, 'Account created! Redirecting to your profile…');
+    } catch (err) {
+      btn.disabled = false; btn.textContent = 'Create Account →';
+      if (err.status === 400 && /already/i.test(err.message)) {
+        showToast('This email is already registered. Try signing in instead.', '#D32F2F');
+        switchTab('login', document.querySelectorAll('.auth-tab')[0]);
+        document.getElementById('li_email').value = email;
+      } else {
+        showToast(err.message || 'Registration failed. Please try again.', '#D32F2F');
+      }
+    }
+  }
+
+  // ── Password strength ─────────────────────────────────────────────
+  function checkStrength(val) {
+    const fill = document.getElementById('strengthFill');
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/\d/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    fill.style.width  = ['0%','30%','55%','78%','100%'][score];
+    fill.style.background = ['transparent','#D32F2F','#F07030','#C08A20','#127A10'][score];
+  }
+
+  // ── Success screen ────────────────────────────────────────────────
+  function showSuccess(title, sub) {
+    document.querySelectorAll('.auth-tab, .auth-panel, .auth-heading, .auth-sub, .trust-bar, .auth-tabs').forEach(el => el.style.display = 'none');
+    document.getElementById('successTitle').textContent = title;
+    document.getElementById('successSub').textContent   = sub;
+    document.getElementById('successScreen').style.display = 'block';
+    const returnParam = new URLSearchParams(window.location.search).get('return');
+    const dest = returnParam ? decodeURIComponent(returnParam) : 'profile.html';
+    setTimeout(() => { window.location.href = dest; }, 2400);
+  }
+
+  // ── Toast ─────────────────────────────────────────────────────────
+  function showToast(msg, bg) {
+    const t = Object.assign(document.createElement('div'), { textContent: msg });
+    t.style.cssText = `position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:${bg};color:#fff;padding:11px 22px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;z-index:99999;box-shadow:0 4px 18px rgba(0,0,0,.25);white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center`;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  }
+
+  // ── Enter key support ─────────────────────────────────────────────
+  function onEnter(e, fn) { if (e.key === 'Enter') fn(); }
+
+  // ── Init ─────────────────────────────────────────────────────────
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('mode') === 'create') {
+      switchTab('register', document.querySelectorAll('.auth-tab')[1]);
+    }
+
+    document.getElementById('li_pass')?.addEventListener('keydown', e => onEnter(e, handleEmailLogin));
+    document.getElementById('reg_pass')?.addEventListener('keydown', e => onEnter(e, handleRegister));
+
+    // If GIS script already loaded before DOMContentLoaded (cached), set it up now
+    if (window.google && window.google.accounts && !_gisReady) _setupGIS();
+
+    // If already authenticated, verify token then redirect
+    const token = localStorage.getItem('jm_token');
+    if (!token) return;
+    const returnParam = params.get('return');
+    const dest = returnParam ? decodeURIComponent(returnParam) : 'profile.html';
+    fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(r => {
+        if (r.ok) {
+          const cached = JSON.parse(localStorage.getItem('jm_user') || '{}');
+          const ok = confirm(`You're already signed in as ${cached.name || 'yourself'}. Go to your profile?`);
+          if (ok) window.location.href = dest;
+        } else {
+          localStorage.removeItem('jm_token');
+          localStorage.removeItem('jm_user');
+        }
+      })
+      .catch(() => {});
+  });
+</script>
+<script src="js/lang-switcher.js"></script>
+</body>
+</html>

@@ -1,0 +1,444 @@
+{
+  "pm-awas": {
+    "schemeId": "pm-awas",
+    "schemeName": "Pradhan Mantri Awas Yojana",
+    "sections": [
+      {
+        "title": "Identity Proof",
+        "documents": [
+          {
+            "id": "aadhaar",
+            "name": "Aadhaar Card",
+            "required": true,
+            "note": "12-digit unique identification number issued by UIDAI",
+            "howToGet": [
+              "Visit nearest Aadhaar enrollment center",
+              "Carry proof of identity and address",
+              "Biometric data will be collected",
+              "Aadhaar will be sent to your address in 60-90 days"
+            ]
+          },
+          {
+            "id": "voter-id",
+            "name": "Voter ID Card",
+            "required": true,
+            "note": "Electoral Photo Identity Card issued by Election Commission",
+            "howToGet": [
+              "Visit National Voters' Service Portal (nvsp.in)",
+              "Fill Form 6 for new registration",
+              "Submit required documents online or at BLO office",
+              "Voter ID will be issued after verification"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Income Proof",
+        "documents": [
+          {
+            "id": "income-cert",
+            "name": "Income Certificate",
+            "required": true,
+            "note": "Issued by tehsildar or sub-divisional magistrate",
+            "howToGet": [
+              "Visit tehsildar office or apply online via state portal",
+              "Submit application with Aadhaar, address proof, and salary slips",
+              "Pay nominal fee (usually ₹10-50)",
+              "Certificate issued within 7-15 days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Address Proof",
+        "documents": [
+          {
+            "id": "ration-card",
+            "name": "Ration Card",
+            "required": true,
+            "note": "Food security card issued by state civil supplies department",
+            "howToGet": [
+              "Apply online via state food & civil supplies portal",
+              "Submit Aadhaar, address proof, and family details",
+              "Visit fair price shop for biometric verification",
+              "Ration card issued within 30 days"
+            ]
+          },
+          {
+            "id": "utility-bill",
+            "name": "Utility Bill (Electricity/Water)",
+            "required": false,
+            "note": "Recent bill not older than 3 months showing current address",
+            "howToGet": [
+              "Download from electricity/water board website or app",
+              "Or visit nearest electricity/water office",
+              "Provide consumer number or registered mobile",
+              "Print or get physical copy of latest bill"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Property Documents",
+        "documents": [
+          {
+            "id": "land-ownership",
+            "name": "Land Ownership Proof",
+            "required": false,
+            "note": "Sale deed, registry, or 7/12 extract showing land ownership",
+            "howToGet": [
+              "Visit sub-registrar office or tehsil office",
+              "Request certified copy of sale deed or 7/12 extract",
+              "Provide survey number and owner details",
+              "Pay nominal fee for certified copies",
+              "Documents issued same day or within 2-3 days"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pm-kisan": {
+    "schemeId": "pm-kisan",
+    "schemeName": "PM-KISAN",
+    "category": "Agriculture · Central Scheme",
+    "sections": [
+      {
+        "title": "Identity Proof",
+        "documents": [
+          {
+            "id": "aadhaar",
+            "name": "Aadhaar Card",
+            "required": true,
+            "note": "Mandatory for linking with PM-KISAN account",
+            "howToGet": [
+              "Visit nearest Aadhaar enrollment center",
+              "Carry proof of identity and address",
+              "Biometric data will be collected",
+              "Aadhaar will be sent to your address in 60-90 days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Land Records",
+        "documents": [
+          {
+            "id": "khasra-khatauni",
+            "name": "Khasra / Khatauni (Land Record)",
+            "required": true,
+            "note": "Land record document showing ownership and area",
+            "howToGet": [
+              "Visit tehsil or patwari office",
+              "Apply online via state revenue portal (e.g., bhulekh.up.nic.in)",
+              "Provide khasra number and village name",
+              "Certified copy issued on payment of nominal fee"
+            ]
+          },
+          {
+            "id": "bank-passbook",
+            "name": "Bank Passbook / Account Details",
+            "required": true,
+            "note": "Savings account linked to Aadhaar for direct benefit transfer",
+            "howToGet": [
+              "Open account at nearest bank or post office",
+              "Link Aadhaar to bank account at bank branch",
+              "Ensure IFSC code is correctly noted from passbook",
+              "Account must be active and operational"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Farmer Status Proof",
+        "documents": [
+          {
+            "id": "farmer-id",
+            "name": "Farmer ID / Kisan Credit Card",
+            "required": false,
+            "note": "Helps in faster verification of farmer status",
+            "howToGet": [
+              "Apply at nearest bank that offers Kisan Credit Card",
+              "Carry land records, identity proof, and Aadhaar",
+              "KCC issued within 15 working days after verification"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ayushman-bharat": {
+    "schemeId": "ayushman-bharat",
+    "schemeName": "Ayushman Bharat",
+    "category": "Healthcare · Central Scheme",
+    "sections": [
+      {
+        "title": "Identity Proof",
+        "documents": [
+          {
+            "id": "aadhaar",
+            "name": "Aadhaar Card",
+            "required": true,
+            "note": "Primary identification document for PMJAY registration",
+            "howToGet": [
+              "Visit nearest Aadhaar enrollment center",
+              "Carry proof of identity and address",
+              "Biometric data will be collected",
+              "Aadhaar will be sent to your address in 60-90 days"
+            ]
+          },
+          {
+            "id": "ration-card",
+            "name": "Ration Card",
+            "required": true,
+            "note": "BPL/AAY ration card to verify SECC eligibility",
+            "howToGet": [
+              "Apply online via state food & civil supplies portal",
+              "Submit Aadhaar, address proof, and family details",
+              "Visit fair price shop for biometric verification",
+              "Ration card issued within 30 days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Family Proof",
+        "documents": [
+          {
+            "id": "family-id",
+            "name": "Family ID / Parivar Pehchan Patra",
+            "required": false,
+            "note": "State-issued family identity document (where applicable)",
+            "howToGet": [
+              "Visit Common Service Centre (CSC) near you",
+              "Carry Aadhaar cards of all family members",
+              "Fill application form and submit biometrics",
+              "ID generated online immediately or within 7 days"
+            ]
+          },
+          {
+            "id": "income-cert",
+            "name": "Income Certificate",
+            "required": false,
+            "note": "May be needed to verify annual household income",
+            "howToGet": [
+              "Visit tehsildar office or apply online via state portal",
+              "Submit application with Aadhaar, address proof, and salary slips",
+              "Pay nominal fee (usually ₹10-50)",
+              "Certificate issued within 7-15 days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Existing Health Cover",
+        "documents": [
+          {
+            "id": "health-card",
+            "name": "Existing Health/Insurance Card (if any)",
+            "required": false,
+            "note": "Submit if you already have a state health scheme card",
+            "howToGet": [
+              "Check with previous state health scheme office",
+              "Online portals of respective state health department",
+              "Common Service Centre (CSC) may assist"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "post-matric-scholarship": {
+    "schemeId": "post-matric-scholarship",
+    "schemeName": "Post Matric Scholarship",
+    "category": "Education · State Scheme",
+    "sections": [
+      {
+        "title": "Identity Proof",
+        "documents": [
+          {
+            "id": "aadhaar",
+            "name": "Aadhaar Card",
+            "required": true,
+            "note": "Mandatory for scholarship DBT linkage",
+            "howToGet": [
+              "Visit nearest Aadhaar enrollment center",
+              "Carry proof of identity and address",
+              "Biometric data will be collected",
+              "Aadhaar will be sent to your address in 60-90 days"
+            ]
+          },
+          {
+            "id": "caste-cert",
+            "name": "Caste Certificate (SC/ST/OBC)",
+            "required": true,
+            "note": "Issued by tehsildar confirming caste category",
+            "howToGet": [
+              "Apply at tehsildar office or state e-district portal",
+              "Submit Aadhaar, birth certificate, and parent's caste proof",
+              "Pay nominal processing fee",
+              "Certificate issued within 15 working days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Academic Documents",
+        "documents": [
+          {
+            "id": "marksheet",
+            "name": "Previous Year Marksheet",
+            "required": true,
+            "note": "Marks obtained in the last qualifying examination",
+            "howToGet": [
+              "Collect from your school/college examination office",
+              "Request duplicate from State Board if lost",
+              "Carry both original and self-attested photocopy"
+            ]
+          },
+          {
+            "id": "admission-proof",
+            "name": "Bonafide / Admission Certificate",
+            "required": true,
+            "note": "Certificate from current institution confirming enrollment",
+            "howToGet": [
+              "Apply at your college/university administrative office",
+              "Usually issued free of charge within 1-3 days",
+              "Ensure it mentions course, year, and institution details"
+            ]
+          },
+          {
+            "id": "fee-receipt",
+            "name": "Fee Receipt",
+            "required": true,
+            "note": "Official receipt of tuition/hostel fee paid to institution",
+            "howToGet": [
+              "Collect from college accounts/fees department",
+              "Online fee receipts downloadable from college ERP",
+              "Ensure fee receipt is on institution letterhead"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Financial Proof",
+        "documents": [
+          {
+            "id": "income-cert",
+            "name": "Income Certificate",
+            "required": true,
+            "note": "Parent/guardian annual income must be below scheme threshold",
+            "howToGet": [
+              "Visit tehsildar office or apply online via state portal",
+              "Submit application with Aadhaar, address proof, and salary slips",
+              "Pay nominal fee (usually ₹10-50)",
+              "Certificate issued within 7-15 days"
+            ]
+          },
+          {
+            "id": "bank-passbook",
+            "name": "Bank Passbook (Student's Account)",
+            "required": true,
+            "note": "Student's own savings account linked to Aadhaar for DBT",
+            "howToGet": [
+              "Open account at nearest bank or post office",
+              "Link Aadhaar to bank account at bank branch",
+              "Ensure IFSC code is correctly noted",
+              "Account must be in the student's own name"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "pm-mudra": {
+    "schemeId": "pm-mudra",
+    "schemeName": "Pradhan Mantri Mudra Yojana",
+    "category": "Business · Central Scheme",
+    "sections": [
+      {
+        "title": "Identity Proof",
+        "documents": [
+          {
+            "id": "aadhaar",
+            "name": "Aadhaar Card",
+            "required": true,
+            "note": "Primary KYC document for loan application",
+            "howToGet": [
+              "Visit nearest Aadhaar enrollment center",
+              "Carry proof of identity and address",
+              "Biometric data will be collected",
+              "Aadhaar will be sent to your address in 60-90 days"
+            ]
+          },
+          {
+            "id": "pan-card",
+            "name": "PAN Card",
+            "required": true,
+            "note": "Permanent Account Number for tax and financial verification",
+            "howToGet": [
+              "Apply online at incometax.gov.in or NSDL/UTI portal",
+              "Fill Form 49A and upload photo, ID, and address proof",
+              "Pay fee of ₹110 (Indian address) or ₹1020 (foreign address)",
+              "PAN issued within 15-20 working days"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Business Proof",
+        "documents": [
+          {
+            "id": "business-proof",
+            "name": "Business Existence Proof",
+            "required": true,
+            "note": "Trade license, Udyam registration, or GST certificate",
+            "howToGet": [
+              "Register on Udyam portal (udyamregistration.gov.in) using Aadhaar",
+              "For trade license, apply at local municipal office",
+              "For GST, register at gst.gov.in if annual turnover > ₹20 lakh"
+            ]
+          },
+          {
+            "id": "business-address",
+            "name": "Business Address Proof",
+            "required": true,
+            "note": "Utility bill or lease agreement for business premises",
+            "howToGet": [
+              "Collect latest electricity/water bill for the business address",
+              "Or provide rent agreement if premises is rented",
+              "Self-attested copies are acceptable in most cases"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Financial Documents",
+        "documents": [
+          {
+            "id": "bank-statement",
+            "name": "Bank Statement (6 months)",
+            "required": true,
+            "note": "Recent 6-month bank statement of business/personal account",
+            "howToGet": [
+              "Request from your bank branch or download from net banking",
+              "Statement must be on official bank letterhead with stamp",
+              "Ensure it shows regular business-related transactions"
+            ]
+          },
+          {
+            "id": "it-returns",
+            "name": "Income Tax Returns (if available)",
+            "required": false,
+            "note": "Last 2 years of ITR for higher loan amounts (Kishore/Tarun)",
+            "howToGet": [
+              "File on incometax.gov.in or through a chartered accountant",
+              "Download ITR-V acknowledgment from income tax portal",
+              "Carry a printout with original signature"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

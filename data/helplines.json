@@ -1,0 +1,22 @@
+[
+  { "id": "emergency",    "number": "112",           "name": "National Emergency",       "desc": "Police, fire, ambulance — single number",           "category": "emergency", "available": "24/7" },
+  { "id": "police",       "number": "100",           "name": "Police",                   "desc": "Emergency police assistance",                       "category": "emergency", "available": "24/7" },
+  { "id": "ambulance",    "number": "102",           "name": "Ambulance",                "desc": "Medical emergency & free ambulance service",        "category": "emergency", "available": "24/7" },
+  { "id": "fire",         "number": "101",           "name": "Fire Brigade",             "desc": "Fire & rescue emergency",                          "category": "emergency", "available": "24/7" },
+  { "id": "road",         "number": "1033",          "name": "Road Accident Emergency",  "desc": "Highway accident and road emergency helpline",      "category": "emergency", "available": "24/7" },
+  { "id": "women-safety", "number": "181",           "name": "Women Helpline",           "desc": "Domestic violence, harassment, distress",           "category": "women",     "available": "24/7" },
+  { "id": "women-police", "number": "1091",          "name": "Women Police Helpline",    "desc": "Crimes against women — dedicated police line",      "category": "women",     "available": "24/7" },
+  { "id": "child",        "number": "1098",          "name": "Childline",                "desc": "Child abuse, missing children, child labour",       "category": "children",  "available": "24/7" },
+  { "id": "elder",        "number": "14567",         "name": "Elder Helpline",           "desc": "Senior citizen abuse and assistance",               "category": "seniors",   "available": "24/7" },
+  { "id": "legal-aid",    "number": "15100",         "name": "NALSA Legal Aid",          "desc": "Free legal aid for eligible citizens",             "category": "legal",     "available": "Mon–Sat" },
+  { "id": "anti-corrupt", "number": "1064",          "name": "Anti-Corruption",          "desc": "Report bribery and government corruption",          "category": "legal",     "available": "Mon–Fri" },
+  { "id": "consumer",     "number": "1800-11-4000",  "name": "Consumer Helpline",        "desc": "Consumer complaints, fraud, defective products",    "category": "consumer",  "available": "Mon–Sat 9am–5pm" },
+  { "id": "cyber",        "number": "1930",          "name": "Cyber Crime Helpline",     "desc": "Online fraud, UPI scam, cybercrime reporting",      "category": "cyber",     "available": "24/7" },
+  { "id": "health",       "number": "104",           "name": "Health Helpline",          "desc": "Medical advice, health information & mental health","category": "health",    "available": "24/7" },
+  { "id": "ayushman",     "number": "14555",         "name": "Ayushman Bharat",          "desc": "PM-JAY card, hospital queries and complaints",      "category": "health",    "available": "Mon–Sat" },
+  { "id": "farmer",       "number": "1800-180-1551", "name": "Kisan Call Centre",        "desc": "Agriculture advice, crop and farm queries",         "category": "farmer",    "available": "6am–10pm" },
+  { "id": "pm-kisan",     "number": "155261",        "name": "PM-KISAN Helpline",        "desc": "PM-KISAN installment queries and complaints",       "category": "farmer",    "available": "Mon–Fri" },
+  { "id": "ration",       "number": "1967",          "name": "PDS / Ration Helpline",    "desc": "Ration card and food security complaints",          "category": "consumer",  "available": "Mon–Fri" },
+  { "id": "mental",       "number": "iCall: 9152987821", "name": "Mental Health (iCall)", "desc": "Counselling, stress, anxiety and mental wellness", "category": "health",    "available": "Mon–Sat" },
+  { "id": "labour",       "number": "1800-11-7979",  "name": "Labour Helpline",          "desc": "Workers' rights, wage theft, unsafe conditions",     "category": "legal",     "available": "Mon–Sat" }
+]

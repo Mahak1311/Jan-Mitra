@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="256" fill="#D4611A"/>
+  <!-- Inner cream circle -->
+  <circle cx="256" cy="256" r="210" fill="#FAF6F0"/>
+  <!-- Tricolor arc at top -->
+  <path d="M 256 46 A 210 210 0 0 1 466 256" stroke="#D4611A" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M 466 256 A 210 210 0 0 1 256 466" stroke="#ffffff" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M 256 466 A 210 210 0 0 1 46 256 A 210 210 0 0 1 256 46" stroke="#127A10" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <!-- JM Monogram -->
+  <text x="256" y="290" font-family="serif" font-weight="900" font-size="160" text-anchor="middle" fill="#0C2340">J</text>
+  <text x="310" y="340" font-family="serif" font-weight="700" font-size="80" text-anchor="middle" fill="#D4611A">M</text>
+  <!-- Tagline dot -->
+  <circle cx="256" cy="380" r="8" fill="#127A10"/>
+</svg>

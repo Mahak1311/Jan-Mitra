@@ -1,0 +1,466 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Checklist — JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--wh:#FFFFFF;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10);--gntint:rgba(18,122,16,.08);--ortint:rgba(212,97,26,.07)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden;padding-bottom:90px}
+    /* -- Tricolor & Nav -- */
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;border:none;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    /* -- Hero -- */
+    .hero{background:var(--nv);padding:64px 6% 72px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(212,97,26,.18),transparent 55%);pointer-events:none}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sfb);margin-bottom:16px;display:block}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,4vw,54px);color:white;line-height:1.1;margin-bottom:14px}
+    .hero h1 em{color:var(--sfb);font-style:normal}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;max-width:520px;margin:0 auto 32px;font-weight:300}
+    .scheme-selector{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);padding:11px 22px;border-radius:50px;cursor:pointer;transition:all .25s;backdrop-filter:blur(6px)}
+    .scheme-selector:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
+    .scheme-selector span{font-weight:600;color:white;font-size:14px}
+    .scheme-selector .arrow{opacity:.6;font-size:11px}
+    /* -- Layout -- */
+    .main-wrap{max-width:1100px;margin:44px auto;padding:0 6%;display:grid;grid-template-columns:1fr 310px;gap:24px;align-items:start}
+    /* -- Checklist Card -- */
+    .checklist-card{background:white;border-radius:16px;border:1.5px solid var(--bd);box-shadow:0 6px 28px rgba(12,35,64,.07);overflow:hidden;transition:opacity .25s,transform .25s}
+    .card-header{padding:28px 28px 20px;border-bottom:1.5px solid var(--bd)}
+    .scheme-title{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--nv);margin-bottom:10px}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px}
+    .badge-category{background:rgba(12,35,64,.07);color:var(--nv)}
+    .badge-verified{background:var(--gntint);color:var(--gr)}
+    /* Progress */
+    .progress-section{padding:20px 28px;border-bottom:1.5px solid var(--bd)}
+    .progress-label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:12px;font-weight:700;color:var(--inm);letter-spacing:.5px;text-transform:uppercase}
+    .progress-bar-container{height:8px;background:rgba(12,35,64,.08);border-radius:10px;overflow:hidden}
+    .progress-bar{height:100%;background:linear-gradient(90deg,var(--sf),var(--sfb));border-radius:10px;transition:width .5s ease}
+    /* Sections */
+    .checklist-sections{padding:8px 0}
+    .checklist-section{padding:20px 28px;border-bottom:1.5px solid var(--bd)}
+    .checklist-section:last-child{border-bottom:none}
+    .section-title{font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--inl);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+    .checklist-item{padding:14px 16px;border-radius:10px;margin-bottom:8px;border:1.5px solid transparent;background:var(--cr);transition:all .25s;cursor:default}
+    .checklist-item:last-child{margin-bottom:0}
+    .checklist-item:hover{background:white;border-color:var(--bd);box-shadow:0 2px 12px rgba(12,35,64,.06)}
+    .checklist-item.completed{background:var(--gntint);border-color:rgba(18,122,16,.2)}
+    .item-main{display:flex;align-items:flex-start;gap:13px}
+    .checkbox-wrapper{position:relative;width:22px;height:22px;flex-shrink:0;margin-top:1px}
+    .checkbox-wrapper input{width:22px;height:22px;cursor:pointer;opacity:0;position:absolute;z-index:1}
+    .checkbox-custom{width:22px;height:22px;border:2px solid var(--bd);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .25s;background:white}
+    .checkbox-wrapper input:checked+.checkbox-custom{background:var(--gr);border-color:var(--gr);animation:checkBounce .35s ease}
+    .checkbox-custom::after{content:'?';color:white;font-weight:700;font-size:13px;opacity:0;transform:scale(0);transition:all .25s}
+    .checkbox-wrapper input:checked+.checkbox-custom::after{opacity:1;transform:scale(1)}
+    @keyframes checkBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+    .item-content{flex:1;min-width:0}
+    .item-title{font-weight:600;font-size:14px;color:var(--nv);margin-bottom:3px}
+    .completed .item-title{text-decoration:line-through;opacity:.55}
+    .item-note{font-size:12.5px;color:var(--inl);margin-bottom:7px;line-height:1.5;font-weight:300}
+    .item-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .status-tag{font-size:10.5px;padding:3px 9px;border-radius:12px;font-weight:700;letter-spacing:.3px}
+    .status-have{background:var(--gntint);color:var(--gr)}
+    .status-need{background:rgba(212,97,26,.1);color:var(--sf)}
+    .status-maybe{background:rgba(12,110,189,.08);color:#0C6EBD}
+    .how-to-link{color:var(--sf);font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;border:none;background:none;padding:0;transition:color .2s;font-family:'DM Sans',sans-serif}
+    .how-to-link:hover{color:var(--nv)}
+    .how-to-content{max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .35s ease;background:rgba(192,138,32,.07);border-radius:8px;margin-top:0}
+    .how-to-content.expanded{max-height:400px;margin-top:10px;padding:12px 14px}
+    .how-to-content ol{margin-left:18px;color:var(--inm)}
+    .how-to-content li{font-size:12.5px;margin-bottom:5px;line-height:1.5}
+    /* -- Sidebar -- */
+    .sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
+    .tips-card{background:white;border-radius:14px;border:1.5px solid var(--bd);padding:22px;box-shadow:0 4px 16px rgba(12,35,64,.06)}
+    .tips-header{display:flex;align-items:center;gap:9px;margin-bottom:16px}
+    .tips-icon{font-size:22px}
+    .tips-title{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:var(--nv)}
+    .tip-item{background:var(--cr);padding:11px 13px;border-radius:8px;margin-bottom:8px;font-size:12.5px;color:var(--ink);line-height:1.55;border-left:3px solid var(--sf)}
+    .tip-item:last-child{margin-bottom:0}
+    .tip-item strong{font-weight:700;color:var(--nv)}
+    .quick-links-card{background:white;border-radius:14px;border:1.5px solid var(--bd);padding:22px}
+    .ql-title{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;color:var(--nv);margin-bottom:14px}
+    .ql-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1.5px solid var(--bd);margin-bottom:8px;text-decoration:none;font-size:12.5px;font-weight:600;color:var(--inm);transition:all .2s}
+    .ql-item:hover{border-color:var(--sf);color:var(--sf);background:var(--ortint)}
+    .ql-item:last-child{margin-bottom:0}
+    /* -- Scheme Switcher -- */
+    .switcher-section{max-width:1100px;margin:0 auto 44px;padding:0 6%}
+    .switcher-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .switcher-label{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--inl)}
+    .switcher-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;scrollbar-color:var(--sf) var(--bd)}
+    .scheme-card{min-width:200px;background:white;border-radius:12px;padding:16px 18px;border:1.5px solid var(--bd);cursor:pointer;transition:all .25s;flex-shrink:0}
+    .scheme-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(12,35,64,.1);border-color:var(--sf)}
+    .scheme-card.active{border-color:var(--sf);background:var(--ortint)}
+    .scheme-card-icon{font-size:22px;margin-bottom:8px;display:block}
+    .scheme-card-title{font-weight:700;font-size:13.5px;color:var(--nv);margin-bottom:3px;line-height:1.3}
+    .scheme-card-category{font-size:11px;color:var(--inl);font-weight:500}
+    .scheme-card.active .scheme-card-title{color:var(--sf)}
+    /* -- Action Bar -- */
+    .action-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(250,246,240,.97);backdrop-filter:blur(14px);border-top:1.5px solid var(--bd);padding:0 6%;height:70px;display:flex;align-items:center;z-index:500}
+    .action-bar-inner{max-width:1100px;margin:0 auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .action-progress{display:flex;align-items:center;gap:10px}
+    .ap-icon{font-size:18px}
+    .ap-text{font-weight:700;font-size:15px;color:var(--nv)}
+    .ap-sub{font-size:11px;color:var(--inl);font-weight:500;display:block}
+    .action-buttons{display:flex;gap:10px}
+    .action-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .22s;text-decoration:none;white-space:nowrap}
+    .action-btn:hover{transform:translateY(-1px)}
+    .btn-orange{background:var(--sf);color:white}
+    .btn-orange:hover{background:var(--nv);box-shadow:0 4px 14px rgba(212,97,26,.3)}
+    .btn-green{background:var(--gr);color:white}
+    .btn-green:hover{background:#0f6008;box-shadow:0 4px 14px rgba(18,122,16,.3)}
+    /* -- Scheme Dropdown -- */
+    .scheme-dropdown-overlay{display:none;position:fixed;inset:0;background:rgba(7,15,25,.6);z-index:600;align-items:center;justify-content:center;padding:20px}
+    .scheme-dropdown-overlay.open{display:flex}
+    .scheme-dropdown-box{background:white;border-radius:18px;padding:28px;max-width:460px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.22);animation:fadeInUp .3s ease}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sdb-head{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--nv);margin-bottom:18px}
+    .scheme-option{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;cursor:pointer;transition:all .2s;border:1.5px solid transparent;margin-bottom:8px}
+    .scheme-option:hover{background:var(--cr);border-color:var(--bd)}
+    .scheme-option.active{border-color:var(--sf);background:var(--ortint)}
+    .scheme-option-name{font-weight:700;font-size:14px;color:var(--nv)}
+    .scheme-option-cat{font-size:11.5px;color:var(--inl);margin-top:2px}
+    .sdb-close{margin-top:8px;width:100%;padding:12px;border:1.5px solid var(--bd);border-radius:10px;background:transparent;color:var(--inm);font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
+    .sdb-close:hover{background:var(--nv);color:white;border-color:var(--nv)}
+    /* -- Print -- */
+    @media print{.tricolor,nav,.hero,.switcher-section,.action-bar,.tips-card,.quick-links-card,.how-to-content,.how-to-link,.progress-section,.item-meta .status-tag{display:none!important}body{background:#fff!important;padding:0}
+    .main-wrap{display:block!important}.checklist-card{box-shadow:none!important;border:none!important}.checklist-item{page-break-inside:avoid}}
+    @media(max-width:900px){.main-wrap{grid-template-columns:1fr}.sidebar{position:static}}
+    @media(max-width:768px){.nav-links{display:none}.action-btn span:last-child{display:none}.action-btn{padding:10px 14px}}
+  </style>
+</head>
+<body>
+  <script src="js/api.js"></script>
+  <script src="js/auth-ui.js"></script>
+
+  <!-- Scheme selector dropdown overlay -->
+  <div class="scheme-dropdown-overlay" id="schemeDropdownOverlay" onclick="handleOverlayClick(event)">
+    <div class="scheme-dropdown-box">
+      <div class="sdb-head">Select a Scheme</div>
+      <div id="schemeOptionsList"></div>
+      <button class="sdb-close" onclick="closeSchemeDropdown()">Close</button>
+    </div>
+  </div>
+
+  <div class="tricolor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+      <span class="logo-wm">Jan<em>Mitra</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+      <li><a href="checklist.html" class="active">Documents</a></li>
+      <li><a href="rights.html">Rights</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+    <a href="chat.html" class="nav-cta">Ask JanMitra</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">No Rejected Applications</span>
+      <h1>Know <em>Exactly</em> What<br>Documents You Need</h1>
+      <p class="hero-sub">JanMitra tells you every document required — before you visit the office. Track your progress, download, or share.</p>
+      <div class="scheme-selector" onclick="toggleSchemeDropdown()">
+        <span id="selectedScheme">Scheme: PM Awas Yojana</span>
+        <span class="arrow">?</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="main-wrap">
+    <div class="checklist-card" id="checklistCard">
+      <!-- Populated by JS -->
+    </div>
+    <div class="sidebar">
+      <div class="tips-card">
+        <div class="tips-header"><div class="tips-icon">💡</div><div class="tips-title">JanMitra Tips</div></div>
+        <div class="tip-item"><strong>Bring photocopies:</strong> Always carry 2 photocopies of each document along with originals.</div>
+        <div class="tip-item"><strong>Self-attest:</strong> Sign across your photo on each photocopy before submission.</div>
+        <div class="tip-item"><strong>Visit timing:</strong> Government offices work 10 AM–5 PM weekdays. Avoid last week of month.</div>
+        <div class="tip-item"><strong>Keep receipts:</strong> Always collect acknowledgment receipt after document submission.</div>
+      </div>
+      <div class="quick-links-card">
+        <div class="ql-title">Quick Links</div>
+        <a href="eligibility.html" class="ql-item">✅ Check My Eligibility</a>
+        <a href="schemes.html" class="ql-item">🏛️ Browse All Schemes</a>
+        <a href="index.html" class="ql-item">🤖 Ask JanMitra AI</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="switcher-section">
+    <div class="switcher-head">
+      <span class="switcher-label">Switch Scheme</span>
+    </div>
+    <div class="switcher-scroll">
+      <div class="scheme-card active" onclick="switchScheme('pm-awas')"><span class="scheme-card-icon">🏠</span><div class="scheme-card-title">PM Awas Yojana</div><div class="scheme-card-category">Housing · Central</div></div>
+      <div class="scheme-card" onclick="switchScheme('pm-kisan')"><span class="scheme-card-icon">🌾</span><div class="scheme-card-title">PM-KISAN</div><div class="scheme-card-category">Agriculture · Central</div></div>
+      <div class="scheme-card" onclick="switchScheme('ayushman-bharat')"><span class="scheme-card-icon">🏥</span><div class="scheme-card-title">Ayushman Bharat</div><div class="scheme-card-category">Healthcare · Central</div></div>
+      <div class="scheme-card" onclick="switchScheme('post-matric-scholarship')"><span class="scheme-card-icon">🎓</span><div class="scheme-card-title">Post Matric Scholarship</div><div class="scheme-card-category">Education · State</div></div>
+      <div class="scheme-card" onclick="switchScheme('pm-mudra')"><span class="scheme-card-icon">💼</span><div class="scheme-card-title">PM Mudra Yojana</div><div class="scheme-card-category">Business · Central</div></div>
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <div class="action-bar-inner">
+      <div class="action-progress">
+        <div class="ap-icon">📋</div>
+        <div>
+          <div class="ap-text" id="actionProgressText">0/0 Ready</div>
+          <span class="ap-sub">documents collected</span>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="action-btn btn-orange" onclick="downloadPDF()"><span>📎</span><span>Download Checklist</span></button>
+        <button class="action-btn btn-green" onclick="shareWhatsApp()"><span>📱</span><span>Share via WhatsApp</span></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSchemeId = 'pm-awas';
+    const SCHEMES = [
+      { id: 'pm-awas',                name: 'PM Awas Yojana',          category: 'Housing · Central Scheme' },
+      { id: 'pm-kisan',               name: 'PM-KISAN',                category: 'Agriculture · Central Scheme' },
+      { id: 'ayushman-bharat',        name: 'Ayushman Bharat',         category: 'Healthcare · Central Scheme' },
+      { id: 'post-matric-scholarship',name: 'Post Matric Scholarship',  category: 'Education · State Scheme' },
+      { id: 'pm-mudra',               name: 'PM Mudra Yojana',         category: 'Business · Central Scheme' }
+    ];
+
+    function buildChecklistHTML(data) {
+      let html = `
+        <div class="card-header">
+          <h2 class="scheme-title" id="schemeTitle">${data.schemeName}</h2>
+          <div class="badges">
+            <span class="badge badge-category">${data.category || ''}</span>
+            <span class="badge badge-verified">✅ Verified</span>
+          </div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-label"><span>Your Progress</span><span id="progressText">0 of 0 documents ready</span></div>
+          <div class="progress-bar-container"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+        </div>
+        <div class="checklist-sections">`;
+      data.sections.forEach(section => {
+        html += `<div class="checklist-section"><h3 class="section-title">${section.title}</h3>`;
+        section.documents.forEach(doc => {
+          const reqTag = doc.required
+            ? `<span class="status-tag status-need">❌ Need to arrange</span>`
+            : `<span class="status-tag status-maybe">⚠️ May be needed</span>`;
+          const steps = (doc.howToGet || []).map(s => `<li>${s}</li>`).join('');
+          html += `
+            <div class="checklist-item">
+              <div class="item-main">
+                <div class="checkbox-wrapper">
+                  <input type="checkbox" data-doc-id="${doc.id}" onchange="handleCheckboxChange(this)">
+                  <div class="checkbox-custom"></div>
+                </div>
+                <div class="item-content">
+                  <div class="item-title">${doc.name}</div>
+                  <div class="item-note">${doc.note || ''}</div>
+                  <div class="item-meta">${reqTag}<button class="how-to-link" onclick="toggleHowTo(this)">How to get this?</button></div>
+                  <div class="how-to-content"><ol>${steps}</ol></div>
+                </div>
+              </div>
+            </div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div>`;
+      return html;
+    }
+
+    async function loadChecklist() {
+      try {
+        const data = await JanMitraAPI.Documents.getChecklist(currentSchemeId);
+        const card = document.getElementById('checklistCard');
+        card.innerHTML = buildChecklistHTML(data);
+        updateProgressBar();
+        if (JanMitraAPI.Auth.isAuthenticated()) {
+          try { const progress = await JanMitraAPI.Documents.getProgress(currentSchemeId); applyProgress(progress); } catch(e){}
+        }
+      } catch(e) { console.error('Failed to load checklist:', e); }
+    }
+
+    function applyProgress(progress) {
+      if (!progress || !progress.documents) return;
+      progress.documents.forEach(doc => {
+        if (!doc.completed) return;
+        const cb = document.querySelector(`input[data-doc-id="${doc.documentId}"]`);
+        if (cb) { cb.checked = true; cb.closest('.checklist-item').classList.add('completed'); }
+      });
+      updateProgressBar();
+    }
+
+    function handleCheckboxChange(checkbox) {
+      if (!JSON.parse(localStorage.getItem('jm_user') || 'null')) {
+        /* Revert the browser's optimistic toggle before showing modal */
+        checkbox.checked = !checkbox.checked;
+        requireAuth(
+          'track your documents',
+          'Sign in to save your document progress, download checklists, and pick up right where you left off.'
+        );
+        return;
+      }
+      const item = checkbox.closest('.checklist-item');
+      const docId = checkbox.getAttribute('data-doc-id');
+      checkbox.checked ? item.classList.add('completed') : item.classList.remove('completed');
+      updateProgressBar();
+      if (JanMitraAPI.Auth.isAuthenticated() && docId)
+        JanMitraAPI.Documents.updateProgress(currentSchemeId, docId, checkbox.checked).catch(()=>{});
+    }
+
+    function updateProgressBar() {
+      const all = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      const total = all.length;
+      const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+      const pct = total ? (checked / total) * 100 : 0;
+      const bar = document.getElementById('progressBar');
+      const text = document.getElementById('progressText');
+      const actionText = document.getElementById('actionProgressText');
+      if (bar) bar.style.width = pct + '%';
+      if (text) text.textContent = `${checked} of ${total} documents ready`;
+      if (actionText) actionText.textContent = `${checked}/${total} Ready`;
+    }
+
+    function updateProgress() { updateProgressBar(); }
+
+    function toggleHowTo(element) {
+      const content = element.closest('.item-meta').nextElementSibling;
+      const isExpanded = content.classList.contains('expanded');
+      document.querySelectorAll('.how-to-content').forEach(el => el.classList.remove('expanded'));
+      document.querySelectorAll('.how-to-link').forEach(el => el.textContent = 'How to get this?');
+      if (!isExpanded) { content.classList.add('expanded'); element.textContent = 'Hide instructions'; }
+    }
+
+    async function switchScheme(schemeId) {
+      if (schemeId === currentSchemeId) return;
+      currentSchemeId = schemeId;
+      document.querySelectorAll('.scheme-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll(`.scheme-card`).forEach(c => {
+        const title = c.querySelector('.scheme-card-title')?.textContent;
+        const s = SCHEMES.find(x => x.name.includes(title?.split(' ')[0]));
+        if (s && s.id === schemeId) c.classList.add('active');
+      });
+      const scheme = SCHEMES.find(s => s.id === schemeId);
+      if (scheme) document.getElementById('selectedScheme').textContent = `Scheme: ${scheme.name}`;
+      const card = document.getElementById('checklistCard');
+      card.style.opacity = '0'; card.style.transform = 'translateY(14px)';
+      await loadChecklist();
+      card.style.opacity = '1'; card.style.transform = 'translateY(0)';
+      renderDropdownOptions();
+    }
+
+    function renderDropdownOptions() {
+      const list = document.getElementById('schemeOptionsList');
+      if (!list) return;
+      list.innerHTML = SCHEMES.map(s => `
+        <div class="scheme-option ${s.id === currentSchemeId ? 'active' : ''}" onclick="selectFromDropdown('${s.id}')">
+          <div><div class="scheme-option-name">${s.name}</div><div class="scheme-option-cat">${s.category}</div></div>
+          ${s.id === currentSchemeId ? '<span style="color:var(--sf);font-weight:700;font-size:18px">?</span>' : ''}
+        </div>`).join('');
+    }
+
+    function toggleSchemeDropdown() { renderDropdownOptions(); document.getElementById('schemeDropdownOverlay').classList.add('open'); }
+    function closeSchemeDropdown() { document.getElementById('schemeDropdownOverlay').classList.remove('open'); }
+    function handleOverlayClick(e) { if (e.target === document.getElementById('schemeDropdownOverlay')) closeSchemeDropdown(); }
+
+    async function selectFromDropdown(schemeId) {
+      closeSchemeDropdown();
+      document.querySelectorAll('.scheme-card').forEach((card, i) => {
+        card.classList.toggle('active', SCHEMES[i] && SCHEMES[i].id === schemeId);
+      });
+      if (schemeId !== currentSchemeId) {
+        currentSchemeId = schemeId;
+        const scheme = SCHEMES.find(s => s.id === schemeId);
+        if (scheme) document.getElementById('selectedScheme').textContent = `Scheme: ${scheme.name}`;
+        await loadChecklist();
+      }
+    }
+
+    function downloadPDF() {
+      if (!JSON.parse(localStorage.getItem('jm_user') || 'null')) {
+        requireAuth('download your checklist', 'Sign in to download and share your personalised document checklist.');
+        return;
+      }
+      const scheme = SCHEMES.find(s => s.id === currentSchemeId);
+      const schemeName = scheme ? scheme.name : 'Checklist';
+      const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      let lines = [`Document Checklist — ${schemeName}`, `Generated by JanMitra  |  Date: ${new Date().toLocaleDateString('en-IN')}`, ''];
+      let lastSection = '';
+      checkboxes.forEach(cb => {
+        const section = cb.closest('.checklist-section');
+        const sectionTitle = section ? section.querySelector('.section-title')?.textContent : '';
+        if (sectionTitle && sectionTitle !== lastSection) { lines.push(`\n-- ${sectionTitle} --`); lastSection = sectionTitle; }
+        const name = cb.closest('.checklist-item')?.querySelector('.item-title')?.textContent || '';
+        const note = cb.closest('.checklist-item')?.querySelector('.item-note')?.textContent || '';
+        lines.push(`${cb.checked ? '[?]' : '[ ]'}  ${name}${note ? ' — ' + note : ''}`);
+      });
+      const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = `${schemeName.replace(/\s+/g,'_')}_Checklist.txt`; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function shareWhatsApp() {
+      if (!JSON.parse(localStorage.getItem('jm_user') || 'null')) {
+        requireAuth('share your checklist', 'Sign in to share your progress and document checklist via WhatsApp.');
+        return;
+      }
+      const scheme = SCHEMES.find(s => s.id === currentSchemeId);
+      const schemeName = scheme ? scheme.name : 'the scheme';
+      const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+      const total = checkboxes.length;
+      const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+      let docLines = [];
+      checkboxes.forEach(cb => {
+        const name = cb.closest('.checklist-item')?.querySelector('.item-title')?.textContent || '';
+        docLines.push(`${cb.checked ? '✅' : '⬜'} ${name}`);
+      });
+      const msg = [`📋 *Document Checklist — ${schemeName}*`,`Progress: ${checked}/${total} documents ready`,'',docLines.join('\n'),'','🌟 Powered by JanMitra'].join('\n');
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { loadChecklist(); });
+  </script>
+
+<script src="js/auth-gate.js"></script>
+<script src="js/lang-switcher.js"></script>
+<script>(function(){var u=JSON.parse(localStorage.getItem('jm_user')||'null');var el=document.getElementById('navAuth');if(!el)return;if(u){el.href='profile.html';el.title='View Profile';el.style.cssText='display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--nv);text-decoration:none;padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;transition:all .2s';el.innerHTML='<span style="width:24px;height:24px;background:var(--sf);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white">'+( (u.avatar||(u.name||'?').charAt(0)).toUpperCase())+'</span><span>'+( (u.name||'Me').split(' ')[0])+'</span>';}})();</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

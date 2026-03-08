@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp & SMS Access — JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,.10);--wa:#25D366;--wa2:#128C7E}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden;padding-bottom:80px}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;border:none;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    /* Hero */
+    .hero{background:var(--wa2);padding:72px 6% 80px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(37,211,102,.28),transparent 55%);pointer-events:none}
+    .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+    .hero-inner{position:relative;z-index:1}
+    .hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:16px;display:block}
+    .hero-icon{font-size:56px;margin-bottom:16px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,.2))}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(30px,4vw,54px);color:white;line-height:1.1;margin-bottom:14px}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.75;max-width:520px;margin:0 auto 36px;font-weight:300}
+    .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-wa{display:inline-flex;align-items:center;gap:9px;background:var(--wa);color:white;border:none;padding:14px 28px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .25s}
+    .btn-wa:hover{background:#1fbc58;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:white;border:1.5px solid rgba(255,255,255,.3);padding:13px 24px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .25s}
+    .btn-outline:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.6)}
+    /* Main layout */
+    .wrap{max-width:1060px;margin:64px auto;padding:0 6%}
+    /* Steps */
+    .section-label{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sf);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+    .section-label::before{content:'';width:18px;height:2px;background:var(--sf)}
+    .section-h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,3vw,40px);color:var(--nv);line-height:1.1;margin-bottom:48px}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:80px}
+    .step{background:white;border:1.5px solid var(--bd);border-radius:12px;padding:28px 24px;position:relative;transition:all .25s}
+    .step:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(12,35,64,.1);border-color:rgba(37,211,102,.3)}
+    .step-num{font-family:'Playfair Display',serif;font-weight:900;font-size:52px;color:transparent;-webkit-text-stroke:2px rgba(37,211,102,.35);line-height:1;display:block;margin-bottom:12px}
+    .step-icon{font-size:28px;margin-bottom:14px;display:block}
+    .step-title{font-size:16px;font-weight:700;color:var(--nv);margin-bottom:8px}
+    .step-desc{font-size:13px;color:var(--inm);line-height:1.65}
+    /* Conversation demo */
+    .demo-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:80px}
+    .demo-label{font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--inl);margin-bottom:18px}
+    .phone{background:#ECE5DD;border-radius:20px;padding:18px;box-shadow:0 16px 40px rgba(12,35,64,.12);max-width:360px}
+    .phone-head{background:var(--wa2);border-radius:12px 12px 0 0;padding:12px 16px;display:flex;align-items:center;gap:10px;margin:-18px -18px 14px}
+    .ph-av{width:36px;height:36px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+    .ph-name{font-weight:700;color:white;font-size:14px}
+    .ph-st{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
+    .bubble{padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.55;margin-bottom:8px;max-width:85%;position:relative}
+    .bubble.rx{background:white;border-top-left-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+    .bubble.tx{background:#DCF8C6;border-top-right-radius:2px;margin-left:auto;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+    .bubble-time{font-size:10px;color:rgba(0,0,0,.35);text-align:right;margin-top:4px}
+    .bubble strong{color:var(--nv)}
+    /* SMS section */
+    .sms-wrap{background:white;border:1.5px solid var(--bd);border-radius:12px;padding:32px;margin-bottom:80px}
+    .sms-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+    .sms-card{background:var(--cr);border-radius:8px;padding:18px 20px;border:1.5px solid var(--bd)}
+    .sms-keyword{font-family:'DM Sans',monospace;font-size:15px;font-weight:700;color:var(--nv);background:rgba(212,97,26,.08);padding:4px 10px;border-radius:4px;display:inline-block;margin-bottom:8px}
+    .sms-desc{font-size:13px;color:var(--inm);line-height:1.5}
+    .sms-number{display:inline-flex;align-items:center;gap:10px;background:var(--nv);color:white;padding:11px 24px;border-radius:6px;font-size:16px;font-weight:700;letter-spacing:1px;margin-top:20px}
+    /* FAQ */
+    .faq{margin-bottom:80px}
+    .faq-item{border-bottom:1.5px solid var(--bd);padding:20px 0}
+    .faq-q{font-weight:700;font-size:15px;color:var(--nv);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .faq-q::after{content:'+';font-size:22px;font-weight:300;color:var(--sf);flex-shrink:0;transition:transform .25s}
+    .faq-item.open .faq-q::after{transform:rotate(45deg)}
+    .faq-a{font-size:13.5px;color:var(--inm);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease}
+    .faq-item.open .faq-a{max-height:200px;padding-top:12px}
+    /* CTA */
+    .cta-bar{background:var(--nv);border-radius:16px;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
+    .cta-bar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(37,211,102,.12),transparent 55%)}
+    .cta-bar h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:white;margin-bottom:12px;position:relative}
+    .cta-bar p{color:rgba(255,255,255,.5);font-size:14px;margin-bottom:28px;position:relative}
+    /* Responsive */
+    .rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+    .rv.vis{opacity:1;transform:translateY(0)}
+    @media(max-width:768px){.steps{grid-template-columns:1fr}.demo-wrap{grid-template-columns:1fr}.sms-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div class="tricolor"></div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+    <span class="logo-wm">Jan<em>Mitra</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="schemes.html">Schemes</a></li>
+    <li><a href="eligibility.html">Eligibility</a></li>
+    <li><a href="checklist.html">Documents</a></li>
+    <li><a href="rights.html">Rights</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+  <a href="chat.html" class="nav-cta">💬 Ask JanMitra</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Access Channel · WhatsApp & SMS</span>
+    <span class="hero-icon">📱</span>
+    <h1>JanMitra on<br>WhatsApp & SMS</h1>
+    <p class="hero-sub">No app install needed. Ask about government schemes, check eligibility, and get document lists — right in WhatsApp or as a plain text SMS, in any language.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/?text=Namaste%20JanMitra!%20Mujhe%20government%20schemes%20ke%20baare%20mein%20jaanna%20hai." target="_blank" class="btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Open WhatsApp Chat
+      </a>
+      <a href="chat.html" class="btn-outline">Try Web Chat Instead →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Main content -->
+<div class="wrap">
+
+  <!-- Steps -->
+  <div class="rv">
+    <span class="section-label">How It Works</span>
+    <h2 class="section-h2">3 simple steps to get started</h2>
+  </div>
+  <div class="steps">
+    <div class="step rv">
+      <span class="step-num">01</span>
+      <span class="step-icon">📱</span>
+      <div class="step-title">Save the Number</div>
+      <p class="step-desc">Save JanMitra's WhatsApp number to your contacts. No app download, no account creation — works on any Android or feature phone with WhatsApp.</p>
+    </div>
+    <div class="step rv" style="transition-delay:.1s">
+      <span class="step-num">02</span>
+      <span class="step-icon">💬</span>
+      <div class="step-title">Send Your Question</div>
+      <p class="step-desc">Type or speak your question in any language — Hindi, Tamil, Telugu, Bengali, or English. Ask about schemes, eligibility, or documents. No special format needed.</p>
+    </div>
+    <div class="step rv" style="transition-delay:.2s">
+      <span class="step-num">03</span>
+      <span class="step-icon">✅</span>
+      <div class="step-title">Get Clear Guidance</div>
+      <p class="step-desc">Receive plain-language answers with scheme details, eligibility criteria, document lists, and links to official portals — all within seconds.</p>
+    </div>
+  </div>
+
+  <!-- Conversation Demo -->
+  <div class="rv">
+    <span class="section-label">Sample Conversations</span>
+    <h2 class="section-h2">See how it really works</h2>
+  </div>
+  <div class="demo-wrap">
+    <div class="rv">
+      <div class="demo-label">🇮🇳 Hindi Conversation</div>
+      <div class="phone">
+        <div class="phone-head">
+          <div class="ph-av">🤝</div>
+          <div>
+            <div class="ph-name">JanMitra AI</div>
+            <div class="ph-st">Online · Replies instantly</div>
+          </div>
+        </div>
+        <div class="bubble tx">Mera ghar pakka nahi hai. Koi scheme milegi?<div class="bubble-time">2:10 PM ✓✓</div></div>
+        <div class="bubble rx">
+          <strong>PM Awas Yojana</strong> aapke liye hai! 🏠<br><br>
+          ✅ Eligibility: Annual income ₹3 lakh se kam, apna pakka ghar nahi hona chahiye<br>
+          💰 Benefit: ₹1.2–2.5 lakh subsidy seedha bank account mein<br><br>
+          Documents chahiye? Type karein <strong>AWAS DOCS</strong>
+          <div class="bubble-time">2:10 PM</div>
+        </div>
+        <div class="bubble tx">AWAS DOCS<div class="bubble-time">2:11 PM ✓✓</div></div>
+        <div class="bubble rx">
+          <strong>PM Awas ke liye documents:</strong><br>
+          📄 Aadhaar Card<br>
+          📄 Income Certificate (Tehsildar se)<br>
+          📄 Bank Passbook<br>
+          📄 Land documents / No land certificate<br>
+          📄 Passport Photo (2)<br><br>
+          Poori checklist: janmitra.in/checklist
+          <div class="bubble-time">2:11 PM</div>
+        </div>
+      </div>
+    </div>
+    <div class="rv" style="transition-delay:.1s">
+      <div class="demo-label">🎓 English Conversation</div>
+      <div class="phone">
+        <div class="phone-head">
+          <div class="ph-av">🤝</div>
+          <div>
+            <div class="ph-name">JanMitra AI</div>
+            <div class="ph-st">Online · Replies instantly</div>
+          </div>
+        </div>
+        <div class="bubble tx">My daughter passed Class 10. What scholarships can she get?<div class="bubble-time">3:45 PM ✓✓</div></div>
+        <div class="bubble rx">
+          Great question! Here are <strong>top scholarships</strong> for Class 10 pass students:<br><br>
+          🎓 <strong>Post Matric Scholarship</strong> — Full tuition for SC/ST/OBC<br>
+          🎓 <strong>NMMS</strong> — ₹12,000/year for merit students<br>
+          🎓 <strong>NSP Portal</strong> — 50+ more at scholarships.gov.in<br><br>
+          What is her category? (General/SC/ST/OBC)
+          <div class="bubble-time">3:45 PM</div>
+        </div>
+        <div class="bubble tx">OBC, family income is ₹1.8 lakh<div class="bubble-time">3:46 PM ✓✓</div></div>
+        <div class="bubble rx">
+          ✅ She qualifies for <strong>Post Matric Scholarship (OBC)</strong>!<br><br>
+          📅 Apply before: October 31<br>
+          🔗 Apply at: scholarships.gov.in<br><br>
+          Want the full document checklist? Reply <strong>DOCS SCHOLARSHIP</strong>
+          <div class="bubble-time">3:46 PM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMS Section -->
+  <div class="sms-wrap rv">
+    <span class="section-label">SMS Commands</span>
+    <h2 class="section-h2" style="margin-bottom:8px">No WhatsApp? Use plain SMS</h2>
+    <p style="font-size:14px;color:var(--inm);margin-bottom:0">Send these keywords to our SMS number to get instant information — works on any phone, even 2G feature phones.</p>
+    <div class="sms-grid">
+      <div class="sms-card">
+        <div class="sms-keyword">AWAS</div>
+        <p class="sms-desc">Get details about PM Awas Yojana — eligibility, benefits, and how to apply for housing subsidy.</p>
+      </div>
+      <div class="sms-card">
+        <div class="sms-keyword">KISAN</div>
+        <p class="sms-desc">PM-KISAN scheme info — ₹6,000/year farmer support, who qualifies, and installment status.</p>
+      </div>
+      <div class="sms-card">
+        <div class="sms-keyword">HEALTH</div>
+        <p class="sms-desc">Ayushman Bharat PM-JAY details — ₹5 lakh free hospitalisation, how to get your card.</p>
+      </div>
+      <div class="sms-card">
+        <div class="sms-keyword">SCHOLAR</div>
+        <p class="sms-desc">Scholarship schemes for students — NSP, Post Matric, NMMS and how to apply via NPS portal.</p>
+      </div>
+      <div class="sms-card">
+        <div class="sms-keyword">MUDRA</div>
+        <p class="sms-desc">PM Mudra Yojana — collateral-free business loans up to ₹10 lakh for small enterprises.</p>
+      </div>
+      <div class="sms-card">
+        <div class="sms-keyword">HELP</div>
+        <p class="sms-desc">Get a list of all available SMS keywords and quick links in reply.</p>
+      </div>
+    </div>
+    <div style="margin-top:28px;display:flex;align-items:center;flex-wrap:wrap;gap:20px">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--inl);margin-bottom:8px">SMS / WhatsApp Number</div>
+        <div class="sms-number">📱 +91 XXXXX XXXXX</div>
+      </div>
+      <div style="font-size:13px;color:var(--inl);max-width:300px">Free incoming. Carrier SMS charges may apply. Works on all networks including BSNL, Airtel, Jio, Vi.</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="rv">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-h2">Common questions</h2>
+  </div>
+  <div class="faq rv">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is this service free to use?</div>
+      <div class="faq-a">Yes, JanMitra is completely free for all Indian citizens. There are no charges for using the WhatsApp or web chat. Standard SMS charges from your telecom operator may apply for SMS queries.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Which languages are supported?</div>
+      <div class="faq-a">JanMitra understands and replies in Hindi, Tamil, Telugu, Bengali, Marathi, Kannada, Malayalam, and English. Just type in your language and it will respond in the same language.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does it work on 2G / slow internet?</div>
+      <div class="faq-a">Yes. WhatsApp works on 2G networks, and SMS works with no data connection at all. The responses are text-only and load very quickly even on slow connections.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is my personal information safe?</div>
+      <div class="faq-a">JanMitra does not store your personal details. Conversations are used only to generate responses in real time. We do not share data with third parties. You never need to share Aadhaar, bank details, or passwords.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I apply for schemes directly through WhatsApp?</div>
+      <div class="faq-a">JanMitra guides you through the process and provides official portal links, but actual scheme applications happen on government portals (like pmkisan.gov.in, pmjay.gov.in, etc.). JanMitra helps you prepare and navigate — it does not submit applications on your behalf.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar rv">
+    <h2>Start your first conversation</h2>
+    <p>Get answers about government schemes in under 30 seconds — in your language.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative">
+      <a href="https://wa.me/?text=Namaste%20JanMitra!%20Mujhe%20government%20schemes%20ke%20baare%20mein%20jaanna%20hai." target="_blank" class="btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Open WhatsApp
+      </a>
+      <a href="chat.html" class="btn-outline">Try Web Chat</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const rv = document.querySelectorAll('.rv');
+  const io = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), { threshold: 0.08 });
+  rv.forEach(el => io.observe(el));
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+<script src="js/auth-gate.js"></script>
+<script src="js/lang-switcher.js"></script>
+<script>(function(){var u=JSON.parse(localStorage.getItem('jm_user')||'null');var el=document.getElementById('navAuth');if(!el)return;if(u){el.href='profile.html';el.title='View Profile';el.style.cssText='display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--nv);text-decoration:none;padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;transition:all .2s';el.innerHTML='<span style="width:24px;height:24px;background:var(--sf);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white">'+( (u.avatar||(u.name||'?').charAt(0)).toUpperCase())+'</span><span>'+( (u.name||'Me').split(' ')[0])+'</span>';}})();</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>

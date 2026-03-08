@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pm-awas",
+    "name": "Pradhan Mantri Awas Yojana",
+    "category": "Housing",
+    "type": "Central Scheme",
+    "description": "Housing for all - provides financial assistance for construction of pucca houses to eligible beneficiaries",
+    "benefits": "Subsidy of ₹1.2-2.5 lakh for house construction",
+    "eligibility": {
+      "income": "Annual income below ₹3 lakh (EWS) or ₹3-6 lakh (LIG)",
+      "age": "18-70 years",
+      "other": "Should not own a pucca house anywhere in India"
+    },
+    "deadline": "2025-03-31"
+  },
+  {
+    "id": "pm-kisan",
+    "name": "PM-KISAN",
+    "category": "Agriculture",
+    "type": "Central Scheme",
+    "description": "Income support to all farmer families with cultivable land",
+    "benefits": "₹6,000 per year in three installments",
+    "eligibility": {
+      "occupation": "Farmer with cultivable land",
+      "landholding": "Any size of landholding",
+      "other": "Name in land records"
+    },
+    "deadline": "Ongoing"
+  },
+  {
+    "id": "ayushman-bharat",
+    "name": "Ayushman Bharat - PM-JAY",
+    "category": "Healthcare",
+    "type": "Central Scheme",
+    "description": "Health insurance coverage for secondary and tertiary care hospitalization",
+    "benefits": "Health cover of ₹5 lakh per family per year",
+    "eligibility": {
+      "income": "Based on SECC 2011 data",
+      "family": "Covers entire family",
+      "other": "Automatic inclusion for eligible families"
+    },
+    "deadline": "Ongoing"
+  }
+]

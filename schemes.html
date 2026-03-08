@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Schemes — JanMitra</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#D4611A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="JanMitra">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--sf:#D4611A;--sfb:#F07030;--nv:#0C2340;--gr:#127A10;--cr:#FAF6F0;--gd:#C08A20;--wh:#FFFFFF;--ink:#0D1A26;--inm:#3A4F5E;--inl:#7A8E9A;--bd:rgba(12,35,64,0.10)}
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--cr);color:var(--ink);overflow-x:hidden}
+    .tricolor{height:4px;background:linear-gradient(90deg,var(--sf) 33.3%,#fff 33.3%,#fff 66.6%,var(--gr) 66.6%)}
+    nav{position:sticky;top:0;z-index:200;background:rgba(250,246,240,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-mark{width:36px;height:36px;background:var(--nv);border-radius:6px;display:flex;flex-direction:column;overflow:hidden}
+    .lms{height:3px}.lms.s{background:var(--sf)}.lms.g{background:var(--gr)}
+    .lmm{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:12px;color:white}
+    .logo-wm{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:var(--nv)}
+    .logo-wm em{color:var(--sf);font-style:normal}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-size:11px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--inm);text-decoration:none;transition:color .2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--sf)}
+    .nav-cta{background:var(--sf);color:white;border:none;padding:9px 20px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.8px;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .nav-cta:hover{background:var(--nv);transform:translateY(-1px)}
+    .hero{background:var(--nv);padding:72px 6% 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,97,26,.18) 0%,transparent 60%);pointer-events:none}
+    .hero-inner{position:relative;z-index:1;max-width:680px}
+    .hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--sfb);margin-bottom:16px;display:block}
+    .hero h1{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(34px,4vw,56px);color:white;line-height:1.08;margin-bottom:16px}
+    .hero h1 em{color:var(--sfb);font-style:normal}
+    .hero-sub{font-size:16px;color:rgba(255,255,255,.58);line-height:1.7;max-width:520px;margin-bottom:36px;font-weight:300}
+    .search-bar{display:flex;align-items:center;background:white;border-radius:8px;max-width:520px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25)}
+    .search-bar input{flex:1;border:none;outline:none;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:transparent}
+    .search-bar button{background:var(--sf);color:white;border:none;padding:14px 22px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;white-space:nowrap}
+    .search-bar button:hover{background:var(--nv)}
+    .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sf)}
+    .ss{padding:22px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.18)}
+    .ss:last-child{border-right:none}
+    .ssn{font-family:'Playfair Display',serif;font-weight:900;font-size:28px;color:white;display:block}
+    .ssl{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:3px;display:block}
+    .filters-section{padding:36px 6% 0}
+    .filters-label{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--inl);margin-bottom:14px;display:block}
+    .filters{display:flex;gap:10px;flex-wrap:wrap}
+    .filter-btn{display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:50px;border:1.5px solid var(--bd);background:white;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;color:var(--inm);cursor:pointer;transition:all .22s}
+    .filter-btn:hover{border-color:var(--sf);color:var(--sf);transform:translateY(-1px);box-shadow:0 4px 12px rgba(212,97,26,.12)}
+    .filter-btn.active{background:var(--nv);color:white;border-color:var(--nv)}
+    /* State filter */
+    .state-filter-wrap{padding:16px 6% 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .state-label{font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--inl);white-space:nowrap}
+    .state-select{padding:8px 14px;border-radius:50px;border:1.5px solid var(--bd);background:white;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;color:var(--inm);cursor:pointer;outline:none;transition:all .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237A8E9A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+    .state-select:focus,.state-select:hover{border-color:var(--sf);color:var(--nv)}
+    .state-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(18,122,16,.12);color:#127A10;letter-spacing:.5px;text-transform:uppercase;border:1px solid rgba(18,122,16,.2)}
+    /* Tracker button */
+    .btn-track{flex:0 0 auto;padding:11px 13px;background:white;color:var(--inl);border:1.5px solid var(--bd);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap}
+    .btn-track:hover{border-color:var(--sf);color:var(--sf)}
+    .btn-track.saved{background:rgba(212,97,26,.08);color:var(--sf);border-color:var(--sf)}
+    .btn-track.applied{background:rgba(18,122,16,.08);color:#127A10;border-color:#127A10}
+    .btn-track.approved{background:rgba(192,138,32,.1);color:var(--gd);border-color:var(--gd)}
+    /* My Schemes floating button */
+    #mySchemesFab{position:fixed;bottom:28px;right:28px;background:var(--nv);color:white;border:none;border-radius:50px;padding:13px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(12,35,64,.35);z-index:9000;display:none;align-items:center;gap:9px;transition:all .25s}
+    #mySchemesFab:hover{background:var(--sf);transform:translateY(-2px)}
+    #mySchemesFab .fab-count{background:var(--sf);color:white;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+    /* My Schemes panel */
+    #myPanel{position:fixed;top:0;right:-440px;width:420px;max-width:95vw;height:100vh;background:white;z-index:10000;box-shadow:-16px 0 48px rgba(12,35,64,.18);transition:right .38s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden}
+    #myPanel.open{right:0}
+    .panel-head{background:var(--nv);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+    .panel-title{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:white}
+    .panel-close{background:rgba(255,255,255,.12);border:none;color:white;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .panel-close:hover{background:rgba(255,255,255,.22)}
+    .panel-body{flex:1;overflow-y:auto;padding:20px}
+    .panel-body::-webkit-scrollbar{width:4px}.panel-body::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+    .panel-section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--inl);margin:16px 0 10px;display:flex;align-items:center;gap:8px}
+    .panel-section-label::before{content:'';flex:1;height:1px;background:var(--bd)}
+    .panel-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--bd);margin-bottom:8px;transition:border-color .2s}
+    .panel-item:hover{border-color:rgba(12,35,64,.2)}
+    .panel-item-icon{font-size:22px;flex-shrink:0}
+    .panel-item-body{flex:1;min-width:0}
+    .panel-item-name{font-size:13.5px;font-weight:700;color:var(--nv);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .panel-item-cat{font-size:11px;color:var(--inl)}
+    .panel-status-btns{display:flex;gap:4px;flex-shrink:0}
+    .psb{padding:5px 9px;border-radius:5px;border:1.5px solid var(--bd);font-size:10px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;background:white;color:var(--inm)}
+    .psb.active-saved{background:rgba(212,97,26,.1);color:var(--sf);border-color:var(--sf)}
+    .psb.active-applied{background:rgba(18,122,16,.1);color:#127A10;border-color:#127A10}
+    .psb.active-approved{background:rgba(192,138,32,.1);color:var(--gd);border-color:var(--gd)}
+    .panel-empty{text-align:center;padding:60px 20px;color:var(--inl);font-size:14px}
+    .panel-empty .pe-icon{font-size:48px;display:block;margin-bottom:12px}
+    .panel-footer{padding:16px 22px;border-top:1.5px solid var(--bd);flex-shrink:0}
+    .panel-clear{width:100%;padding:11px;border:1.5px solid rgba(196,43,43,.3);background:transparent;color:#C42B2B;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+    .panel-clear:hover{background:rgba(196,43,43,.06)}
+    #panelOverlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:9999;display:none;backdrop-filter:blur(2px)}
+    #panelOverlay.open{display:block}
+    .schemes-section{padding:40px 6% 80px}
+    .schemes-count{font-size:12px;font-weight:600;color:var(--inl);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px}
+    .schemes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:22px}
+    .scheme-card{background:white;border-radius:14px;overflow:hidden;border:1.5px solid var(--bd);transition:transform .28s,box-shadow .28s,border-color .28s;display:flex;flex-direction:column;opacity:0;transform:translateY(20px);animation:cardIn .5s ease forwards}
+    .scheme-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(12,35,64,.12);border-color:transparent}
+    @keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+    .card-top{height:6px}
+    .card-body{padding:24px 24px 20px;flex:1;display:flex;flex-direction:column}
+    .card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .scheme-icon-wrap{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+    .scheme-badge{font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap}
+    .scheme-name{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--nv);margin-bottom:6px;line-height:1.3}
+    .scheme-cat{font-size:11px;font-weight:600;color:var(--inl);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+    .scheme-desc{font-size:13.5px;color:var(--inm);line-height:1.65;margin-bottom:14px;font-weight:300;flex:1}
+    .scheme-benefit{display:flex;align-items:flex-start;gap:9px;background:var(--cr);border-radius:8px;padding:11px 13px;margin-bottom:18px;border-left:3px solid var(--gd)}
+    .scheme-benefit-icon{font-size:16px;flex-shrink:0}
+    .scheme-benefit-text{font-size:12.5px;color:var(--ink);font-weight:600;line-height:1.45}
+    .card-actions{display:flex;gap:10px;margin-top:auto}
+    .btn-primary{flex:1;padding:11px 10px;background:var(--sf);color:white;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:5px}
+    .btn-primary:hover{background:var(--nv);transform:translateY(-1px)}
+    .btn-secondary{flex:1;padding:11px 10px;background:white;color:var(--nv);border:1.5px solid var(--bd);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none;text-align:center;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:5px}
+    .btn-secondary:hover{border-color:var(--nv);background:var(--nv);color:white}
+    .empty-state{text-align:center;padding:80px 20px;grid-column:1/-1}
+    .empty-state .es-icon{font-size:56px;margin-bottom:16px;display:block}
+    .empty-state h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--nv);margin-bottom:8px}
+    .empty-state p{color:var(--inm);font-size:14px}
+    .cta-banner{background:var(--nv);padding:64px 6%;text-align:center;position:relative;overflow:hidden}
+    .cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50%,rgba(212,97,26,.15),transparent 65%);pointer-events:none}
+    .cta-banner h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(26px,3vw,42px);color:white;margin-bottom:10px;position:relative}
+    .cta-banner h2 em{color:var(--sfb);font-style:normal}
+    .cta-banner p{color:rgba(255,255,255,.5);font-size:15px;margin-bottom:28px;position:relative}
+    .cta-banner-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;position:relative}
+    .btn-white{background:white;color:var(--nv);border:none;padding:13px 30px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-white:hover{background:var(--sfb);color:white}
+    .btn-outline-white{background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.3);padding:12px 26px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .22s;display:inline-block}
+    .btn-outline-white:hover{border-color:white;color:white}
+    footer{background:#070F19;padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .fl{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:white}
+    .fl em{color:var(--sf);font-style:normal}
+    .flinks{display:flex;gap:22px;list-style:none}
+    .flinks a{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+    .flinks a:hover{color:var(--sf)}
+    .fcp{font-size:10px;color:rgba(255,255,255,.17)}
+    @media(max-width:768px){.nav-links{display:none}.stats-strip{grid-template-columns:repeat(2,1fr)}.schemes-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <script src="js/api.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <div class="tricolor"></div>
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><div class="lms s"></div><div class="lmm">JM</div><div class="lms g"></div></div>
+      <span class="logo-wm">Jan<em>Mitra</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="schemes.html" class="active">Schemes</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="rights.html">Rights</a></li>
+      <li><a href="jobs.html">Jobs</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a id="navAuth" href="login.html" style="font-size:12px;font-weight:700;color:var(--inm);text-decoration:none;letter-spacing:.5px;padding:9px 16px;border:1.5px solid var(--bd);border-radius:5px;transition:all .2s">Sign In</a>
+    <a href="chat.html" class="nav-cta">Ask JanMitra</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">500+ Verified Schemes</span>
+      <h1>Discover <em>Government</em><br>Schemes for You</h1>
+      <p class="hero-sub">Browse central and state programs. Filter by category, check eligibility instantly, and get your document checklist ready.</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search schemes, benefits, eligibility..." oninput="handleSearch(this.value)">
+        <button onclick="handleSearch(document.getElementById('searchInput').value)">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-strip">
+    <div class="ss"><span class="ssn">500+</span><span class="ssl">Schemes</span></div>
+    <div class="ss"><span class="ssn">28</span><span class="ssl">States Covered</span></div>
+    <div class="ss"><span class="ssn">6</span><span class="ssl">Categories</span></div>
+    <div class="ss"><span class="ssn">Free</span><span class="ssl">Always</span></div>
+  </div>
+
+  <div class="filters-section">
+    <span class="filters-label">Filter by Category</span>
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterSchemes('all',this)">All Schemes</button>
+      <button class="filter-btn" onclick="filterSchemes('housing',this)">🏠 Housing</button>
+      <button class="filter-btn" onclick="filterSchemes('agriculture',this)">🌾 Agriculture</button>
+      <button class="filter-btn" onclick="filterSchemes('healthcare',this)">🏥 Healthcare</button>
+      <button class="filter-btn" onclick="filterSchemes('education',this)">📚 Education</button>
+      <button class="filter-btn" onclick="filterSchemes('business',this)">💼 Business</button>
+      <button class="filter-btn" onclick="filterSchemes('women',this)">👩 Women</button>
+      <button class="filter-btn" onclick="filterSchemes('finance',this)">💰 Finance</button>
+    </div>
+  </div>
+
+  <div class="state-filter-wrap">
+    <span class="state-label">State</span>
+    <select class="state-select" id="stateFilter" onchange="filterByState(this.value)">
+      <option value="all">🇮🇳 All India</option>
+      <option value="gujarat">Gujarat</option>
+      <option value="maharashtra">Maharashtra</option>
+      <option value="rajasthan">Rajasthan</option>
+      <option value="uttar-pradesh">Uttar Pradesh</option>
+      <option value="tamil-nadu">Tamil Nadu</option>
+      <option value="karnataka">Karnataka</option>
+      <option value="west-bengal">West Bengal</option>
+    </select>
+  </div>
+
+  <div class="schemes-section">
+    <div class="schemes-count" id="schemesCount">Showing all schemes</div>
+    <div class="schemes-grid" id="schemesGrid"></div>
+  </div>
+
+  <div class="cta-banner">
+    <h2>Not sure which scheme applies?<br><em>JanMitra will guide you.</em></h2>
+    <p>Answer a few questions and our AI finds schemes you qualify for.</p>
+    <div class="cta-banner-btns">
+      <a href="eligibility.html" class="btn-white">Check My Eligibility</a>
+      <a href="index.html" class="btn-outline-white">Ask JanMitra AI</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fl">Jan<em>Mitra</em></div>
+    <ul class="flinks">
+      <li><a href="about.html">About</a></li>
+      <li><a href="checklist.html">Documents</a></li>
+      <li><a href="eligibility.html">Eligibility</a></li>
+    </ul>
+    <div class="fcp">Built for Bharat</div>
+  </footer>
+
+  <!-- My Schemes FAB -->
+  <button id="mySchemesFab" onclick="openPanel()" style="display:none">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+    My Schemes
+    <span class="fab-count" id="fabCount">0</span>
+  </button>
+  <div id="panelOverlay" onclick="closePanel()"></div>
+  <div id="myPanel">
+    <div class="panel-head">
+      <span class="panel-title">📌 My Schemes</span>
+      <button class="panel-close" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+    <div class="panel-footer">
+      <button class="panel-clear" onclick="clearAll()">Clear All Saved Schemes</button>
+    </div>
+  </div>
+
+  <script>
+  // ── Full Schemes data (19 schemes, central + state-specific) ──────────────
+  const SCHEMES = [
+    {id:'pm-awas',category:'housing',state:'all',icon:'🏠',color:'#D4611A',bgColor:'rgba(212,97,26,.1)',badgeBg:'rgba(212,97,26,.12)',badgeColor:'#D4611A',name:'Pradhan Mantri Awas Yojana',cat:'Housing · Central Scheme',desc:'Housing for all — provides financial assistance for construction of pucca houses to economically weaker sections and low-income groups.',benefit:'Subsidy of ₹1.2–2.5 lakh for house construction',eligLink:'eligibility.html?scheme=pm-awas',docLink:'checklist.html?scheme=pm-awas'},
+    {id:'pm-kisan',category:'agriculture',state:'all',icon:'🌾',color:'#127A10',bgColor:'rgba(18,122,16,.1)',badgeBg:'rgba(18,122,16,.12)',badgeColor:'#127A10',name:'PM-KISAN',cat:'Agriculture · Central Scheme',desc:'Income support to all farming families owning cultivable land across India, paid directly to bank accounts in three equal installments.',benefit:'₹6,000 per year in three equal installments',eligLink:'eligibility.html?scheme=pm-kisan',docLink:'checklist.html?scheme=pm-kisan'},
+    {id:'ayushman',category:'healthcare',state:'all',icon:'🏥',color:'#0C6EBD',bgColor:'rgba(12,110,189,.1)',badgeBg:'rgba(12,110,189,.12)',badgeColor:'#0C6EBD',name:'Ayushman Bharat – PM-JAY',cat:'Healthcare · Central Scheme',desc:"World's largest health assurance scheme providing cover for secondary and tertiary care hospitalization to 50 crore beneficiaries.",benefit:'Health cover of ₹5 lakh per family per year',eligLink:'eligibility.html?scheme=ayushman',docLink:'checklist.html?scheme=ayushman-bharat'},
+    {id:'scholarship',category:'education',state:'all',icon:'🎓',color:'#7B2D8B',bgColor:'rgba(123,45,139,.1)',badgeBg:'rgba(123,45,139,.12)',badgeColor:'#7B2D8B',name:'Post Matric Scholarship (SC/ST/OBC)',cat:'Education · Central Scheme',desc:'Financial assistance to SC/ST/OBC students pursuing post-matriculation education. Covers tuition fees and maintenance allowance.',benefit:'Full tuition fee + monthly maintenance allowance',eligLink:'eligibility.html?scheme=scholarship',docLink:'checklist.html?scheme=post-matric-scholarship'},
+    {id:'pm-mudra',category:'business',state:'all',icon:'💼',color:'#C08A20',bgColor:'rgba(192,138,32,.1)',badgeBg:'rgba(192,138,32,.12)',badgeColor:'#C08A20',name:'Pradhan Mantri Mudra Yojana',cat:'Business · Central Scheme',desc:'Micro-financing for small enterprises. Covers Shishu (up to ₹50K), Kishore (up to ₹5L) and Tarun (up to ₹10L) categories.',benefit:'Loans up to ₹10 lakh — no collateral required',eligLink:'eligibility.html?scheme=pm-mudra',docLink:'checklist.html?scheme=pm-mudra'},
+    {id:'pmjdy',category:'finance',state:'all',icon:'🏦',color:'#0C2340',bgColor:'rgba(12,35,64,.09)',badgeBg:'rgba(12,35,64,.1)',badgeColor:'#0C2340',name:'Pradhan Mantri Jan Dhan Yojana',cat:'Finance · Central Scheme',desc:'Financial inclusion program ensuring access to bank accounts, remittance, credit, insurance and pension for all households.',benefit:'Zero-balance account + ₹2 lakh accident insurance',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'nmms',category:'education',state:'all',icon:'📖',color:'#7B2D8B',bgColor:'rgba(123,45,139,.1)',badgeBg:'rgba(123,45,139,.12)',badgeColor:'#7B2D8B',name:'National Means-cum-Merit Scholarship',cat:'Education · Central Scheme',desc:'Scholarship for meritorious Class 9–12 students from economically weaker sections to prevent dropout and encourage higher studies.',benefit:'₹12,000 per year via National Scholarship Portal',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'sukanya',category:'women',state:'all',icon:'👧',color:'#E91E8C',bgColor:'rgba(233,30,140,.08)',badgeBg:'rgba(233,30,140,.1)',badgeColor:'#E91E8C',name:'Sukanya Samriddhi Yojana',cat:'Women · Central Scheme',desc:'Small savings scheme for girl child offering one of the highest interest rates among government schemes. Tax-free maturity amount.',benefit:'7.6% interest p.a. + full tax exemption on maturity',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'atal-pension',category:'finance',state:'all',icon:'💰',color:'#C08A20',bgColor:'rgba(192,138,32,.1)',badgeBg:'rgba(192,138,32,.12)',badgeColor:'#C08A20',name:'Atal Pension Yojana',cat:'Finance · Central Scheme',desc:'Pension scheme for unorganised sector workers guaranteeing fixed monthly pension of ₹1,000 to ₹5,000 after age 60.',benefit:'Guaranteed pension ₹1,000–₹5,000/month after age 60',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'pm-vishwakarma',category:'business',state:'all',icon:'🏺',color:'#C08A20',bgColor:'rgba(192,138,32,.1)',badgeBg:'rgba(192,138,32,.12)',badgeColor:'#C08A20',name:'PM Vishwakarma Yojana',cat:'Business · Central Scheme',desc:'Support scheme for artisans and craftspeople in 18 traditional trades including blacksmithing, carpentry, potmaking, and weaving.',benefit:'₹3 lakh loan at 5% interest + free skill certification',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'pmfby',category:'agriculture',state:'all',icon:'🌱',color:'#127A10',bgColor:'rgba(18,122,16,.1)',badgeBg:'rgba(18,122,16,.12)',badgeColor:'#127A10',name:'PM Fasal Bima Yojana',cat:'Agriculture · Central Scheme',desc:'Comprehensive crop insurance covering losses from natural calamities, pests, and diseases. Mandatory for loanee farmers.',benefit:'Full crop loss coverage at just 1.5–2% premium',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'pm-svamitva',category:'housing',state:'all',icon:'📜',color:'#D4611A',bgColor:'rgba(212,97,26,.1)',badgeBg:'rgba(212,97,26,.12)',badgeColor:'#D4611A',name:'PM SVAMITVA Scheme',cat:'Housing · Central Scheme',desc:'Provides legally documented property rights to rural households via drone mapping of inhabited land in villages.',benefit:'Legal property card (Record of Rights) for rural homes',eligLink:'eligibility.html',docLink:'checklist.html'},
+    // State-specific
+    {id:'mmuy-gujarat',category:'women',state:'gujarat',icon:'👩',color:'#E91E8C',bgColor:'rgba(233,30,140,.08)',badgeBg:'rgba(233,30,140,.1)',badgeColor:'#E91E8C',name:'Mukhyamantri Mahila Utkarsh Yojana',cat:'Women · Gujarat Scheme',desc:'Interest-free loans and SHG formation support for women living below poverty line in Gujarat to promote entrepreneurship.',benefit:'Interest-free loan up to ₹1 lakh for women SHGs',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'ikhedut-gujarat',category:'agriculture',state:'gujarat',icon:'🚜',color:'#127A10',bgColor:'rgba(18,122,16,.1)',badgeBg:'rgba(18,122,16,.12)',badgeColor:'#127A10',name:'iKhedut Portal Schemes',cat:'Agriculture · Gujarat Scheme',desc:'Gujarat portal offering 50+ schemes for farmers — subsidies on seeds, machinery, drip irrigation, and farm storage.',benefit:'Subsidies up to 50% on farm equipment & inputs',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'igsy-rajasthan',category:'education',state:'rajasthan',icon:'📱',color:'#7B2D8B',bgColor:'rgba(123,45,139,.1)',badgeBg:'rgba(123,45,139,.12)',badgeColor:'#7B2D8B',name:'Indira Gandhi Smartphone Yojana',cat:'Education · Rajasthan Scheme',desc:'Free smartphones with internet connectivity for women and Chiranjeevi families of Rajasthan to bridge the digital divide.',benefit:'Free smartphone + 3 years internet data for eligible women',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'mahadbt-mh',category:'education',state:'maharashtra',icon:'🎓',color:'#7B2D8B',bgColor:'rgba(123,45,139,.1)',badgeBg:'rgba(123,45,139,.12)',badgeColor:'#7B2D8B',name:'MahaDBT Portal Scholarships',cat:'Education · Maharashtra Scheme',desc:'Single portal for 42+ scholarship schemes in Maharashtra for SC/ST/OBC/SBC/VJ/NT category students from Class 1 to PhD.',benefit:'Full tuition + maintenance for eligible students',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'kanya-sumangala-up',category:'women',state:'uttar-pradesh',icon:'👩‍🎓',color:'#E91E8C',bgColor:'rgba(233,30,140,.08)',badgeBg:'rgba(233,30,140,.1)',badgeColor:'#E91E8C',name:'Kanya Sumangala Yojana',cat:'Women · Uttar Pradesh Scheme',desc:'Financial incentive scheme in UP to promote girl child welfare, education, and health — from birth to graduation.',benefit:'₹15,000 total in 6 stages from birth to Class 12',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'amma-tn',category:'healthcare',state:'tamil-nadu',icon:'🍱',color:'#0C6EBD',bgColor:'rgba(12,110,189,.1)',badgeBg:'rgba(12,110,189,.12)',badgeColor:'#0C6EBD',name:'Amma Unavagam',cat:'Welfare · Tamil Nadu Scheme',desc:'Highly subsidised canteen meals scheme by Tamil Nadu government offering nutritious breakfast and lunch at nominal cost.',benefit:'Full meals at ₹5–₹15 at 400+ canteens across TN',eligLink:'eligibility.html',docLink:'checklist.html'},
+    {id:'rajiv-ka',category:'healthcare',state:'karnataka',icon:'🏥',color:'#0C6EBD',bgColor:'rgba(12,110,189,.1)',badgeBg:'rgba(12,110,189,.12)',badgeColor:'#0C6EBD',name:'Rajiv Arogya Bhagya',cat:'Healthcare · Karnataka Scheme',desc:'Comprehensive health coverage scheme for BPL families in Karnataka covering in-patient treatment at empanelled hospitals.',benefit:'Free hospitalisation up to ₹1.5 lakh per family per year',eligLink:'eligibility.html',docLink:'checklist.html'},
+  ];
+
+  let activeCategory = 'all', activeSearch = '', activeState = 'all';
+
+  // ── Tracker ───────────────────────────────────────────────
+  const STATUS_CYCLE = [null, 'saved', 'applied', 'approved'];
+  const STATUS_NEXT  = { null:'🔖 Save', saved:'✅ Applied', applied:'🏆 Approved', approved:'✕ Remove' };
+  const STATUS_TAG   = { saved:'🔖 Saved', applied:'✅ Applied', approved:'🏆 Approved' };
+
+  function getStatus(id) { return localStorage.getItem('jm_' + id) || null; }
+  function setStatus(id, st) {
+    st ? localStorage.setItem('jm_' + id, st) : localStorage.removeItem('jm_' + id);
+    updateFab();
+    if (document.getElementById('myPanel').classList.contains('open')) renderPanel();
+  }
+  function cycleStatus(id) {
+    const next = STATUS_CYCLE[(STATUS_CYCLE.indexOf(getStatus(id)) + 1) % STATUS_CYCLE.length];
+    setStatus(id, next);
+    return next;
+  }
+  function updateFab() {
+    const n = SCHEMES.filter(s => getStatus(s.id)).length;
+    document.getElementById('mySchemesFab').style.display = n > 0 ? 'flex' : 'none';
+    document.getElementById('fabCount').textContent = n;
+  }
+
+  // ── Render cards ─────────────────────────────────────────
+  function renderSchemes() {
+    const grid = document.getElementById('schemesGrid');
+    const filtered = SCHEMES.filter(s => {
+      const catOk   = activeCategory === 'all' || s.category === activeCategory;
+      const stateOk = activeState === 'all' || s.state === 'all' || s.state === activeState;
+      const srchOk  = !activeSearch || [s.name, s.desc, s.benefit].some(t => t.toLowerCase().includes(activeSearch));
+      return catOk && stateOk && srchOk;
+    });
+    document.getElementById('schemesCount').textContent =
+      filtered.length === SCHEMES.length
+        ? `Showing all ${SCHEMES.length} schemes`
+        : `Showing ${filtered.length} of ${SCHEMES.length} schemes`;
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="empty-state"><span class="es-icon">🔍</span><h3>No schemes found</h3><p>Try different filters or search terms.</p></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map((s, i) => {
+      const st  = getStatus(s.id);
+      const btn = `<button class="btn-track${st ? ' ' + st : ''}" id="tk-${s.id}" onclick="handleTrack('${s.id}')">${STATUS_NEXT[st]}</button>`;
+      const stateBadge = s.state !== 'all'
+        ? `<span class="state-badge">${s.state.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</span>`
+        : '';
+      return `<div class="scheme-card" style="animation-delay:${i*.06}s">
+        <div class="card-top" style="background:${s.color}"></div>
+        <div class="card-body">
+          <div class="card-header">
+            <div class="scheme-icon-wrap" style="background:${s.bgColor}">${s.icon}</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+              <span class="scheme-badge" style="background:${s.badgeBg};color:${s.badgeColor}">${s.cat.split('·')[0].trim()}</span>
+              ${stateBadge}
+            </div>
+          </div>
+          <div class="scheme-name">${s.name}</div>
+          <div class="scheme-cat">${s.cat}</div>
+          <p class="scheme-desc">${s.desc}</p>
+          <div class="scheme-benefit"><span class="scheme-benefit-icon">💰</span><span class="scheme-benefit-text">${s.benefit}</span></div>
+          <div class="card-actions">
+            <a href="${s.eligLink}" class="btn-primary">Check Eligibility</a>
+            <a href="${s.docLink}" class="btn-secondary">Documents</a>
+            ${btn}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function handleTrack(id) {
+    requireAuth(
+      'save this scheme',
+      'Track your applications, mark schemes as saved or applied, and access them anytime from your profile.',
+      function () {
+        const next = cycleStatus(id);
+        const btn = document.getElementById('tk-' + id);
+        if (btn) { btn.className = 'btn-track' + (next ? ' ' + next : ''); btn.textContent = STATUS_NEXT[next]; }
+        const msg = next ? `${STATUS_TAG[next]} — added to My Schemes` : 'Removed from My Schemes';
+        showToast(msg, next ? '#0C2340' : '#C42B2B');
+      }
+    );
+  }
+  function showToast(msg, bg) {
+    const t = Object.assign(document.createElement('div'), { textContent: msg });
+    t.style.cssText = `position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:${bg};color:#fff;padding:10px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;z-index:99999;box-shadow:0 4px 16px rgba(0,0,0,.25);white-space:nowrap;pointer-events:none`;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2800);
+  }
+
+  function filterSchemes(cat, btn) {
+    activeCategory = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderSchemes();
+  }
+  function filterByState(val) { activeState = val; renderSchemes(); }
+  function handleSearch(val)   { activeSearch = val.trim().toLowerCase(); renderSchemes(); }
+
+  // ── My Schemes panel ─────────────────────────────────────
+  function openPanel()  {
+    renderPanel();
+    document.getElementById('myPanel').classList.add('open');
+    document.getElementById('panelOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePanel() {
+    document.getElementById('myPanel').classList.remove('open');
+    document.getElementById('panelOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function renderPanel() {
+    const body    = document.getElementById('panelBody');
+    const tracked = SCHEMES.filter(s => getStatus(s.id));
+    if (!tracked.length) {
+      body.innerHTML = '<div class="panel-empty"><span class="pe-icon">📌</span><p>No schemes saved yet.<br>Click <strong>🔖 Save</strong> on any card to track it.</p></div>';
+      return;
+    }
+    const groups = { approved: [], applied: [], saved: [] };
+    tracked.forEach(s => groups[getStatus(s.id)].push(s));
+    const labels = { approved: '🏆 Approved', applied: '✅ Applied', saved: '🔖 Saved' };
+    body.innerHTML = Object.entries(labels).flatMap(([st, label]) =>
+      groups[st].length ? [
+        `<div class="panel-section-label">${label}</div>`,
+        ...groups[st].map(s => `
+          <div class="panel-item">
+            <span class="panel-item-icon">${s.icon}</span>
+            <div class="panel-item-body">
+              <div class="panel-item-name">${s.name}</div>
+              <div class="panel-item-cat">${s.cat}</div>
+            </div>
+            <div class="panel-status-btns">
+              <button class="psb ${st==='saved'?'active-saved':''}"     onclick="changeStatus('${s.id}','saved')">Save</button>
+              <button class="psb ${st==='applied'?'active-applied':''}" onclick="changeStatus('${s.id}','applied')">Applied</button>
+              <button class="psb ${st==='approved'?'active-approved':''}" onclick="changeStatus('${s.id}','approved')">Approved</button>
+            </div>
+          </div>`)
+      ] : []
+    ).join('');
+  }
+  function changeStatus(id, st) {
+    setStatus(id, st);
+    const btn = document.getElementById('tk-' + id);
+    if (btn) { btn.className = 'btn-track ' + st; btn.textContent = STATUS_NEXT[st]; }
+  }
+  function clearAll() {
+    if (!confirm('Remove all saved schemes?')) return;
+    SCHEMES.forEach(s => localStorage.removeItem('jm_' + s.id));
+    updateFab(); renderPanel(); renderSchemes();
+  }
+
+  updateFab();
+  renderSchemes();
+  </script>
+
+<script src="js/auth-gate.js"></script>
+<script src="js/lang-switcher.js"></script>
+<script>(function(){var u=JSON.parse(localStorage.getItem('jm_user')||'null');var el=document.getElementById('navAuth');if(!el)return;if(u){el.href='profile.html';el.title='View Profile';el.style.cssText='display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:var(--nv);text-decoration:none;padding:6px 14px;border:1.5px solid var(--bd);border-radius:20px;transition:all .2s';el.innerHTML='<span style="width:24px;height:24px;background:var(--sf);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:white">'+( (u.avatar||(u.name||'?').charAt(0)).toUpperCase())+'</span><span>'+( (u.name||'Me').split(' ')[0])+'</span>';}})();</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    });
+  }
+</script></body>
+</html>
