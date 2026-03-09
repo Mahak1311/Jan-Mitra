@@ -415,49 +415,50 @@
   }
 
   // ── Google Identity Services ───────────────────────────────────────────
-  let _gisReady = false;
-
-  // GIS fires this callback when its script is fully loaded
-  window.onGoogleLibraryLoad = function() {
-    _gisReady = true;
-    _setupGIS();
-  };
+  let _gisClientId = null;
 
   async function _setupGIS() {
-    let clientId;
     try {
       const r = await fetch('/api/auth/google/client-id');
       const d = await r.json();
-      clientId = d.clientId;
-    } catch (e) { return; }
-    if (!clientId) return;
-
-    google.accounts.id.initialize({
-      client_id: clientId,
-      callback: handleGoogleCredential,
-      auto_select: false
-    });
-    _gisReady = clientId; // store for triggerGoogleSignIn
+      if (!d.clientId) return;
+      _gisClientId = d.clientId;
+      google.accounts.id.initialize({
+        client_id: _gisClientId,
+        callback: handleGoogleCredential,
+        auto_select: false,
+        ux_mode: 'popup',
+        cancel_on_tap_outside: true
+      });
+    } catch (e) { /* no Google client id configured */ }
   }
+
+  window.onGoogleLibraryLoad = _setupGIS;
 
   function triggerGoogleSignIn() {
     if (!window.google || !window.google.accounts) {
-      showToast('Google sign-in is loading… please try again in a moment.', '#0C2340');
+      showToast('Google sign-in is loading… please try again.', '#0C2340');
       return;
     }
-    if (!_gisReady) {
+    if (!_gisClientId) {
       showToast('Google sign-in is not configured on this server.', '#0C2340');
       return;
     }
-    google.accounts.id.prompt(notification => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // One-Tap suppressed — open the full account picker popup
-        const clientId = _gisReady;
-        const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(window.location.origin + '/api/auth/google/popup-callback')}&response_type=token&scope=openid%20email%20profile&prompt=select_account`;
-        const popup = window.open(url, 'googleSignIn', 'width=500,height=600,left=200,top=100');
-        window._googlePopup = popup;
-      }
+    // Render an invisible Google button and click it — most reliable cross-browser
+    let wrap = document.getElementById('_gis_render_wrap');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.id = '_gis_render_wrap';
+      wrap.style.cssText = 'position:fixed;top:-999px;left:-999px;opacity:0;pointer-events:none';
+      document.body.appendChild(wrap);
+    }
+    wrap.innerHTML = '';
+    google.accounts.id.renderButton(wrap, {
+      type: 'standard', size: 'large', theme: 'outline', text: 'signin_with'
     });
+    const btn = wrap.querySelector('div[role=button]') || wrap.querySelector('button');
+    if (btn) { btn.click(); }
+    else { google.accounts.id.prompt(); }
   }
 
   async function handleGoogleCredential(response) {

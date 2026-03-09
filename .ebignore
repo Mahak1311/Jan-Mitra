@@ -1,0 +1,10 @@
+# Elastic Beanstalk — files to exclude from deployment bundle
+node_modules/
+.env
+.git/
+.gitignore
+.vscode/
+slides/
+mockup.html
+*.log
+.DS_Store
