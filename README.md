@@ -38,7 +38,7 @@ Instead of navigating multiple complex government portals, users can ask JanMitr
 
 🔗 Website:
 
-d38ywa9o0prbff.cloudfront.net
+https://d38ywa9o0prbff.cloudfront.net/
 
 🎥 Demo Video:
 
